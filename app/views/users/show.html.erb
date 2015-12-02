@@ -1,5 +1,5 @@
 <!-- login page -->
-
+<h1>User Show Page</h1>
 
 <p id="notice"><%= notice %></p>
 
@@ -19,6 +19,8 @@
   <%= @user.uid %>
 </p>
 
-
+<% if logged_in? && current_user.id == @user.id %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
+<% end %>
+
 <%= link_to 'Back', users_path %>
