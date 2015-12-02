@@ -1,6 +1,7 @@
 <% if logged_in? %>
-  <%= link_to current_user.name, user_path(current_user) %>
-  <%= link_to 'Log Out', logout_path %>
+
+  <p><%= link_to "Logged in as #{current_user.name}", user_path(current_user) %> | <%= link_to "Create a project", new_project_path %> | <%= link_to 'Log out', logout_path %></p>
+
 <% else %>
-  <%= link_to 'Log In with Github', login_path %>
+  <%= link_to 'Log in with Github', login_path %>
 <% end %>
