@@ -11,7 +11,6 @@ class SessionsController < ApplicationController
 	      session[:user_id] = @user.id
 	      session[:user_token] = auth_hash[:credentials][:token]
 	      redirect_to user_path(current_user)
-	      binding.pry
 				# Github.repos.list user: "jeffslutzky"
 				github = Github.new
 				github.current_options[:client_id] = ENV["GITHUB_KEY"]
@@ -19,6 +18,8 @@ class SessionsController < ApplicationController
 				login_name = auth_hash[:extra][:raw_info][:login]
 				github_repos = Github.repos.list user: "#{login_name}"
 				github_repos.each do |repo|
+					
+	      binding.pry
 					if !@user.admin.project.find(repo.id)
 						assign_attributes_to_repo(repo)
 					end

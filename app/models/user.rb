@@ -15,7 +15,11 @@ class User < ActiveRecord::Base
 
 	has_one :admin
 	has_one :collaborator
+	has_many :projects, through: :admin
+	has_many :projects, through: :collaborator
+
 	validates :name, presence: true
+
 
 	def self.create_from_omniauth(auth_hash)
 	  user = self.create(provider: auth_hash[:provider],
