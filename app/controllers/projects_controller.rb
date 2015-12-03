@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    binding.pry
+    # binding.pry
     @project.admin = current_user.admin
     respond_to do |format|
       if @project.save

@@ -7,7 +7,7 @@
 
 <p>
   <strong>Github:</strong>
-  <%= @project.github_id %>
+  <%= @project.github_repo_id %>
 </p>
 
 <p>
@@ -15,5 +15,8 @@
   <%= @project.admin_id %>
 </p>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
+<% if logged_in? && current_user.id == @user.id %>
+	<%= link_to 'Edit', edit_project_path(@project) %> |
+<% end %>
+
 <%= link_to 'Back', projects_path %>

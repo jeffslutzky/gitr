@@ -8,10 +8,8 @@
 #  updated_at :datetime         not null
 #
 
-class Collaborator < ActiveRecord::Base
-
-	has_many :project_collaborators
-	has_many :projects, through: :project_collaborators
-	belongs_to :user
+FactoryGirl.define do
+  factory :collaborator do
+  end
 
 end
