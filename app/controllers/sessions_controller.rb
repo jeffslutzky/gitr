@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
 	  @user = User.find_by_provider_and_uid(auth_hash[:provider], auth_hash[:uid]) || User.create_from_omniauth(auth_hash)
 	  if @user
 	       session[:user_id] = @user.id
+	       session[:user_token] = auth_hash[:credentials][:token]
 	       redirect_to user_path(current_user)
 	  else
 	       redirect_to root_url
