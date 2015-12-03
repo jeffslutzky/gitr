@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
 			name: repo.name,
 			github_repo_id: repo.id,
 			url: repo.html_url,
-		})
+			})
 
 	end
 
