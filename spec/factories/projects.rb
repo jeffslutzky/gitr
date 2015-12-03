@@ -10,10 +10,10 @@
 #  updated_at     :datetime         not null
 #
 
-class Project < ActiveRecord::Base
-
-	has_many :project_collaborators
-	has_many :collaborators, through: :project_collaborators
-	belongs_to :admin
+FactoryGirl.define do
+  factory :project do
+    name "My Project"
+    github_repo_id "99999"
+  end
 
 end

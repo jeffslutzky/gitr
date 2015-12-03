@@ -8,10 +8,10 @@
 #  updated_at :datetime         not null
 #
 
-class Collaborator < ActiveRecord::Base
+require 'rails_helper'
 
-	has_many :project_collaborators
-	has_many :projects, through: :project_collaborators
-	belongs_to :user
+RSpec.describe Collaborator, type: :model do
+	let(:collaborator) {FactoryGirl.build(:collaborator, user: user)}
 
+	
 end
