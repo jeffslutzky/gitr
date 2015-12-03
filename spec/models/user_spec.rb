@@ -21,7 +21,7 @@ RSpec.describe User, type: :model do
 			expect(user.admin.user_id).to eq user.id
 		end
 
-	describe "#Users are collaborators (Testing correct association idk)" do
+	describe "#Users are collaborators (Testing correct association)" do
 		it "has correct collaborator" do
 			expect(user.collaborator.user_id).to eq user.id
 		end
