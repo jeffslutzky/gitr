@@ -5,4 +5,4 @@ class CreateJoinTableCollaboratorProject < ActiveRecord::Migration
       t.integer :project_id
     end
   end
-end
+end	
