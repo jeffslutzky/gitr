@@ -17,14 +17,12 @@ ActiveRecord::Schema.define(version: 20151202193122) do
   enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
-    t.integer  "github_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "collaborators", force: :cascade do |t|
-    t.integer  "github_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,10 +35,10 @@ ActiveRecord::Schema.define(version: 20151202193122) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
-    t.integer  "github_id"
+    t.integer  "github_repo_id"
     t.integer  "admin_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "users", force: :cascade do |t|
