@@ -9,7 +9,9 @@
 #
 
 FactoryGirl.define do
-  factory :collaborator do
+  factory :collaborators do
+  	FactoryGirl.build(:collaborator)
+  	FactoryGirl.build(:collaborator)
   end
 
 end

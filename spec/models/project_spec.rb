@@ -13,16 +13,26 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
-	let(:user) { FactoryGirl.build(:user) }
-	let(:admin) { FactoryGirl.build(:admin) }
+	let(:user1) { FactoryGirl.build(:user) }
+	let(:user2) { FactoryGirl.build(:user) }
+	let(:user3) { FactoryGirl.build(:user) }
+	# let(:admin) { FactoryGirl.build(:admin) }
 	let(:project) { FactoryGirl.build(:project) }
 
-	describe "#project has correct admin?" do
-		let(:project) { FactoryGirl.build(:project, admin: admin) }
-		let(:user) { FactoryGirl.build(:user, admin: admin) }
-		it "has an admin attribute corresponding to the correct admin" do
-			expect(project.admin).to eq user.admin
+	describe "#project" do
+		# let(:project) { FactoryGirl.build(:project, admin: admin) }
+		# let(:user) { FactoryGirl.build(:user, admin: admin) }
+		it "has an admin?" do
+			# binding.pry
+			expect(project.admin).to_not eq nil
 		end
-	end	
+
+		# describe "#project can have collaborators" do
+		it "has collaborators" do
+			binding.pry
+			project.collaborators = Collaborator.all
+			expect(project.collaborators).to include?(Collaborator.all)
+		end
+	end
 end
 
