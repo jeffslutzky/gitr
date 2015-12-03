@@ -11,7 +11,6 @@
 class Admin < ActiveRecord::Base
 
 	belongs_to :user
-	has_many :project_collaborators
-	has_many :projects, through: :project_collaborators
+	has_many :projects
 
 end

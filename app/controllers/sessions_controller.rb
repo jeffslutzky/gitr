@@ -18,9 +18,7 @@ class SessionsController < ApplicationController
 				login_name = auth_hash[:extra][:raw_info][:login]
 				github_repos = Github.repos.list user: "#{login_name}"
 				github_repos.each do |repo|
-					
-	      binding.pry
-					if !@user.admin.project.find(repo.id)
+					if !@user.admin.projects.find_by(github_repo_id: repo.id)
 						assign_attributes_to_repo(repo)
 					end
 				end
@@ -31,7 +29,7 @@ class SessionsController < ApplicationController
 
 	def assign_attributes_to_repo(repo)
 		id = repo.id
-		@user.admin.project.create({
+		@user.admin.projects.create({
 			name: repo.name,
 			github_repo_id: repo.id,
 			url: repo.html_url,

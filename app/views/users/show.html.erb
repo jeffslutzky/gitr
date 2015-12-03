@@ -22,6 +22,11 @@
 <p>
 	<strong>Projects:</strong>
 <!-- Github.repos.list user: "jeffslutzky" -->
+	<ol>
+	<% @user.admin.projects.each do |project| %>
+		<li><%= link_to project.name, project.url%></li>
+	<% end %>
+	</ol>
 
 	
 </p>

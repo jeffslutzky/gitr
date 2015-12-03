@@ -10,8 +10,8 @@
 
 class Collaborator < ActiveRecord::Base
 
-	has_many :project_collaborators
-	has_many :projects, through: :project_collaborators
+	has_many :collaborators_projects
+	has_many :projects, through: :collaborators_projects
 	belongs_to :user
 
 end
