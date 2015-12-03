@@ -18,10 +18,13 @@ class User < ActiveRecord::Base
 	validates :name, presence: true
 
 	def self.create_from_omniauth(auth_hash)
-	  self.create(provider: auth_hash[:provider],
+	  user = self.create(provider: auth_hash[:provider],
 	              uid: auth_hash[:uid],
 	              name: auth_hash[:info][:name])
-
+    admin = user.build_admin
+    admin.save
+    collaborator = user.build_collaborator
+    collaborator.save
 	end
 
 
