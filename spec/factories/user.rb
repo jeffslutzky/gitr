@@ -5,5 +5,7 @@ FactoryGirl.define do
 		email "candyman@candyland.org"
 		uid	"0123456789"
 		provider "github"
+		association :admin
+		association :collaborator
 	end
 end
