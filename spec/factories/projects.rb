@@ -14,6 +14,8 @@ FactoryGirl.define do
   factory :project do
     name "My Project"
     github_repo_id "99999"
+    association :admin
+
   end
 
 end
