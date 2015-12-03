@@ -15,7 +15,7 @@
   <%= @project.admin_id %>
 </p>
 
-<% if logged_in? && current_user.id == @user.id %>
+<% if logged_in? && current_user.id == @project.admin_id %>
 	<%= link_to 'Edit', edit_project_path(@project) %> |
 <% end %>
 
