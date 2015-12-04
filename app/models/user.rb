@@ -43,6 +43,8 @@ class User < ActiveRecord::Base
 			})
 			@user.build_admin
 			@user.build_collaborator
+			@user.admin.save
+			@user.collaborator.save
 		end
 		project.collaborators << @user.collaborator
 	end
