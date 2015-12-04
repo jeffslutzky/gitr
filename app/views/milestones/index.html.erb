@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Milestones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>State</th>
+      <th>Project</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @milestones.each do |milestone| %>
+      <tr>
+        <td><%= milestone.title %></td>
+        <td><%= milestone.description %></td>
+        <td><%= milestone.state %></td>
+        <td><%= milestone.project_id %></td>
+        <td><%= link_to 'Show', project_milestone_path(@project, milestone) %></td>
+        <td><%= link_to 'Edit', edit_project_milestone_path(@project, milestone) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Milestone', new_project_milestone_path %>

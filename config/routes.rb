@@ -1,16 +1,15 @@
 Rails.application.routes.draw do
-  
+
   root 'users#index'
-
   get 'sessions/new'
-
   get 'sessions/create'
-
   get 'sessions/destroy'
 
-  resources :projects
+  resources :projects do
+    resources :milestones
+  end
   resources :users
-  
+
   get '/login' => 'sessions#new'
   get '/auth/github/callback' => 'sessions#create'
   get '/logout' => 'sessions#destroy'

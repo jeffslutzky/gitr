@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
 	end
 
   def create
-    binding.pry
     @user = User.find_by_uid( auth_hash[:uid]) || User.create_from_omniauth(auth_hash)
     @user.update(name: auth_hash[:info][:name], provider: auth_hash[:provider])
     # instead of below
@@ -20,7 +19,6 @@ class SessionsController < ApplicationController
 				github.current_options[:client_secret] = ENV["GITHUB_SECRET"]
         github.current_options[:oauth_token] = session[:user_token]
         github.current_options[:per_page] = 100
-        binding.pry
 
         # github.repos.collaborators.all  'reubenson', 'hangman'
 
