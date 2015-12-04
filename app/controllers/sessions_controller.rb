@@ -10,32 +10,39 @@ class SessionsController < ApplicationController
 	  if @user
 	      session[:user_id] = @user.id
 	      session[:user_token] = auth_hash[:credentials][:token]
-	      redirect_to user_path(current_user)
-				# Github.repos.list user: "jeffslutzky"
+
 				github = Github.new
 				github.current_options[:client_id] = ENV["GITHUB_KEY"]
 				github.current_options[:client_secret] = ENV["GITHUB_SECRET"]
+        github.current_options[:oauth_token] = session[:user_token]
+
+        # github.repos.collaborators.all  'reubenson', 'hangman'
+
 				login_name = auth_hash[:extra][:raw_info][:login]
-				github_repos = Github.repos.list user: "#{login_name}"
+
+        github_repos = github.repos.list user: "#{login_name}"
 				github_repos.each do |repo|
 					if !@user.admin.projects.find_by(github_repo_id: repo.id)
-						assign_attributes_to_repo(repo)
+            collaborators = github.repos.collaborators.all  repo.owner.login, repo.name
+						assign_attributes_to_repo(repo,collaborators)
 					end
 				end
+	      redirect_to user_path(current_user)
 	  else
 	       redirect_to root_url
 	  end
 	end
 
-	def assign_attributes_to_repo(repo)
-		id = repo.id
-		@user.admin.projects.create({
+	def assign_attributes_to_repo(repo,collaborators)
+		project = @user.admin.projects.create({
 			name: repo.name,
 			github_repo_id: repo.id,
 			url: repo.html_url,
-			})
-
-	end
+		})
+    collaborators.each do |collaborator_hash|
+      User.find_or_create_from_api(project,collaborator_hash)
+    end
+  end
 
 
 
@@ -52,4 +59,3 @@ protected
 
 
 end
-
