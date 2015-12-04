@@ -14,6 +14,16 @@
   <strong>Admin:</strong>
   <%= @project.admin_id %>
 </p>
+<div id="collaborators">
+  <h3>Collaborators:</h3>
+  <ul>
+    <% @project.collaborators.each do |collaborator| %>
+      <li>
+      <%= link_to collaborator.user.name, collaborator.user %>
+    </li>
+    <% end %>
+  </ul>
+</div>
 
 <% if logged_in? && current_user.id == @project.admin_id %>
 	<%= link_to 'Edit', edit_project_path(@project) %> |
