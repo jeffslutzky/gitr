@@ -24,11 +24,11 @@
 <!-- Github.repos.list user: "jeffslutzky" -->
 	<ol>
 	<% @user.admin.projects.each do |project| %>
-		<li><%= link_to project.name, project.url%></li>
+		<li><%= link_to project.name, project%></li>
 	<% end %>
 	</ol>
 
-	
+
 </p>
 
 <% if logged_in? && current_user.id == @user.id %>
