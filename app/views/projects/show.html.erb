@@ -12,7 +12,7 @@
 
 <p>
   <strong>Admin:</strong>
-  <%= @project.admin_id %>
+  <%= link_to @project.admin.user.name, @project.admin.user %>
 </p>
 <div id="collaborators">
   <h3>Collaborators:</h3>
@@ -25,7 +25,7 @@
   </ul>
 </div>
 <div id="milestones">
-  <h3>Milestones:</h3>
+  <h3><%= link_to "Milestones:", project_milestones_path(@project) %></h3>
   <ul>
     <% @project.milestones.each do |milestone| %>
       <li>
