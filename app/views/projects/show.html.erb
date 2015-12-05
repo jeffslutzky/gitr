@@ -24,6 +24,18 @@
     <% end %>
   </ul>
 </div>
+<div id="milestones">
+  <h3>Milestones:</h3>
+  <ul>
+    <% @project.milestones.each do |milestone| %>
+      <li>
+        <td><%= link_to "#{milestone.title}", project_milestone_path(@project, milestone)%></td>
+        <p>Description: <%=milestone.description %></p>
+    </li>
+    <% end %>
+  </ul>
+
+</div>
 
 <% if logged_in? && current_user.id == @project.admin_id %>
 	<%= link_to 'Edit', edit_project_path(@project) %> |
