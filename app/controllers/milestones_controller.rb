@@ -35,6 +35,16 @@ class MilestonesController < ApplicationController
 
     respond_to do |format|
       if @milestone.save
+
+        #Create New Milestone on Github API (Post Request)
+        github = Github.new user: 'benstew', repo:"#{@project.name}"
+        github.oauth_token = session["user_token"]
+
+        github.issues.milestones.create title: "#{@milestone.title}",
+          state: "#{@milestone.state}",
+          description: "#{@milestone.description}"
+        #   due_on: "Time"
+
         format.html { redirect_to project_milestone_path(@project, @milestone), notice: 'Milestone was successfully created.' }
         format.json { render :show, status: :created, location: project_milestone_path }
       else
