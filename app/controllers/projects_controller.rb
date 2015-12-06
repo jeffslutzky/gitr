@@ -5,6 +5,11 @@ class ProjectsController < ApplicationController
     @projects = Project.all
   end
 
+  def dashboard
+    @projects = current_user.collaborator.projects
+    data = {template: "<div>#{current_user.name} has contributed to #{@projects.count} projects!</div>"}
+    render :json => data
+  end
 
   def show
   end
