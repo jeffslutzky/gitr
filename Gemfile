@@ -39,6 +39,12 @@ gem 'rspec-rails', :group => [:development, :test]
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# twitter bootstrap css & javascript toolkit
+gem 'twitter-bootswatch-rails', '~> 3.3.4'
+
+# twitter bootstrap helpers gem, e.g., alerts etc...
+gem 'twitter-bootswatch-rails-helpers'
+gem 'therubyracer'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
