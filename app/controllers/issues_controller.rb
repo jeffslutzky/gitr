@@ -18,6 +18,7 @@ class IssuesController < ApplicationController
   def new
     @issue = Issue.new
     @project = Project.find(params[:project_id])
+
   end
 
   # GET /issues/1/edit
@@ -35,16 +36,20 @@ class IssuesController < ApplicationController
     respond_to do |format|
       if @issue.save
 
-        #Create New issue
+        #Github object to create new issue
         github = Github.new user: current_user.username, repo:"#{@project.name}"
         github.oauth_token = session["user_token"]
 
-        github.issues.create title: @issue.title,
-          body: @issue.body,
+        #Gathering milestone ID from new issues form
+        milestone_id = params['issue']['milestones']
+  
+        #Creating new issue on github with milestone ID
+        github.issues.create title: "#{@issue.title}",
+          body: "#{@issue.body}"
           # assignee: "octocat",
-          milestone: 1
+          # milestone: "#{milestone_id}"
 
-        format.html { redirect_to project_milestone_path(@project, @issue), notice: 'Issue was successfully created.' }
+        format.html { redirect_to project_issue_path(@project, @issue), notice: 'Issue was successfully created.' }
         format.json { render :show, status: :created, location: project_issue_path }
       else
         format.html { render :new, notice: 'Issue was not successfully updated.' }

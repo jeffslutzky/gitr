@@ -14,6 +14,10 @@
 class Issue < ActiveRecord::Base
   belongs_to :project
 
+  def milestones
+    return 'no project' unless project
+    project.milestones
+  end
 
 
 end

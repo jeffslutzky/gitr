@@ -46,7 +46,6 @@
 </div>
 <% if logged_in? && current_user.id == @project.admin_id %>
   <%= link_to 'New Milestone', new_project_milestone_path(@project) %> |
-  <%= link_to 'Edit Milestone', edit_project_path(@project) %> |
 <% end %>
 
 <!--!!!!!!!!!!!!!!!!!!!!Issues!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
@@ -63,7 +62,6 @@
 </div>
 <% if logged_in? && current_user.id == @project.admin_id %>
   <%= link_to 'New Issue', new_project_issue_path(@project) %> |
-  <%= link_to 'Edit Issue', edit_project_path(@project) %> |
 <% end %>
 
 <!--!!!!!!!!!!!!!!!!!!!!Feed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
