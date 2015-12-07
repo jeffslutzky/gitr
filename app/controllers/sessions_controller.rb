@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by_uid( auth_hash[:uid]) || User.create_from_omniauth(auth_hash)
     @user.update(name: auth_hash[:info][:name], provider: auth_hash[:provider])
+
     # instead of below
 	  # @user = User.find_by_provider_and_uid(auth_hash[:provider], auth_hash[:uid]) || User.create_from_omniauth(auth_hash)
 	  if @user
@@ -19,6 +20,8 @@ class SessionsController < ApplicationController
 				github.current_options[:client_secret] = ENV["GITHUB_SECRET"]
         github.current_options[:oauth_token] = session[:user_token]
         github.current_options[:per_page] = 100
+
+
 
         # github.repos.collaborators.all  'reubenson', 'hangman'
 
