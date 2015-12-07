@@ -7,6 +7,11 @@ class ProjectsController < ApplicationController
 
 
   def show
+    # Showing all events from a repo for an activity feed
+    github = Github.new user: 'benstew', repo:"#{@project.name}"
+    github.oauth_token = session["user_token"]
+    @repo_events = github.activity.events.public
+
   end
 
   def new

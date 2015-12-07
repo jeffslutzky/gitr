@@ -34,7 +34,18 @@
     </li>
     <% end %>
   </ul>
+</div>
 
+<div id="feed">
+  <h3>Activity Feed</h3>
+    <ol>
+      <% @repo_events.each do |event| %>
+        <p>
+            <li><strong>Event Type: <%= event.type %></strong></li>
+            Date: <%= event.created_at %>
+        </p>
+      <% end %>
+    </ol>
 </div>
 
 <% if logged_in? && current_user.id == @project.admin_id %>
