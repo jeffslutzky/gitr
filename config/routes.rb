@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :projects do
     resources :milestones
+    resources :issues
   end
   resources :users
 

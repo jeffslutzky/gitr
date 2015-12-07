@@ -31,6 +31,8 @@
     <% end %>
   </ul>
 </div>
+
+<!--!!!!!!!!!!!!!!!!!!!!Milestones!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
 <div id="milestones">
   <h3><%= link_to "Milestones:", project_milestones_path(@project) %></h3>
   <ul>
@@ -42,7 +44,27 @@
     <% end %>
   </ul>
 </div>
+<% if logged_in? && current_user.id == @project.admin_id %>
+  <%= link_to 'New Milestone', new_project_milestone_path(@project) %> |
+<% end %>
 
+<!--!!!!!!!!!!!!!!!!!!!!Issues!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+<div id="issues">
+  <h3><%= link_to "Issues:", project_issues_path(@project) %></h3>
+  <ul>
+    <% @project.issues.each do |issue| %>
+      <li>
+        <td><%= link_to "#{issue.title}", project_issue_path(@project, issue)%></td>
+        <p>Description: <%=issue.body %></p>
+    </li>
+    <% end %>
+  </ul>
+</div>
+<% if logged_in? && current_user.id == @project.admin_id %>
+  <%= link_to 'New Issue', new_project_issue_path(@project) %> |
+<% end %>
+
+<!--!!!!!!!!!!!!!!!!!!!!Feed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
 <div id="feed">
   <h3>Activity Feed</h3>
     <ol>
@@ -55,9 +77,5 @@
     </ol>
 </div>
 
-<% if logged_in? && current_user.id == @project.admin_id %>
-  <%= link_to 'New', new_project_milestone_path(@project) %> |
-  <%= link_to 'Edit', edit_project_path(@project) %> |
-<% end %>
 
 <%= link_to 'Back', projects_path %>

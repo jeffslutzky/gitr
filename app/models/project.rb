@@ -9,6 +9,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  url            :string
+#  description    :text
 #
 
 class Project < ActiveRecord::Base
@@ -17,6 +18,7 @@ class Project < ActiveRecord::Base
 	has_many :collaborators, -> { uniq }, through: :collaborators_projects
 	# the above uses a scope block http://stackoverflow.com/questions/16569994/deprecation-warning-when-using-has-many-through-uniq-in-rails-4
 	has_many :milestones
+	has_many :issues
 	belongs_to :admin
 	delegate :user, to: :admin
 
