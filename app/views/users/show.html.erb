@@ -1,5 +1,8 @@
 <!-- login page -->
-<h1><%= @user.name%>'s Page</h1>
+<h1><%= @user.name%></h1>
+<p>
+  <strong>Github: <a href ="http://github.com/<%=@user.username%>"><%= @user.username%></a></strong>
+</p>
 
 <p id="notice"><%= notice %></p>
 
@@ -8,7 +11,7 @@
 <img src="<%= @user.avatar_url %>" width=150>
 </p>
 
-<p>
+<!-- <p>
   <strong>Name:</strong>
   <%= @user.name %>
 </p>
@@ -18,6 +21,8 @@
   <strong>Github ID:</strong>
   <%= @user.uid %>
 </p>
+
+ -->
 
 <p>
 	<strong>Projects:</strong>
