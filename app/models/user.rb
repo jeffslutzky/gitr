@@ -22,9 +22,13 @@ class User < ActiveRecord::Base
 
 
 	def self.create_from_omniauth(auth_hash)
-	  user = self.create(provider: auth_hash[:provider],
-	              uid: auth_hash[:uid],
-	              name: auth_hash[:info][:name])
+	  user = self.create(
+	  	provider: auth_hash[:provider],
+      uid: auth_hash[:uid],
+      name: auth_hash[:info][:name],
+      username: auth_hash[:login],
+      avatar_url: auth_hash[:extra][:raw_info][:avatar_url]
+			)
     admin = user.build_admin
     admin.save
     collaborator = user.build_collaborator
@@ -51,7 +55,7 @@ class User < ActiveRecord::Base
 
 	def collaborators
 		users_projects = self.collaborator.projects
-		users_projects.each_with_object([]) do |project,arr|
+		users_projects.each_with_object([]) do |project, arr|
 			project.collaborators.each{|collaborator| arr << collaborator.user}
 		end.flatten.uniq
 

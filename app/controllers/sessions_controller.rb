@@ -7,7 +7,12 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by_uid( auth_hash[:uid]) || User.create_from_omniauth(auth_hash)
-    @user.update(name: auth_hash[:info][:name], provider: auth_hash[:provider])
+    @user.update(
+    	name: auth_hash[:info][:name],
+    	provider: auth_hash[:provider],
+    	username: auth_hash[:extra][:raw_info][:login],
+    	avatar_url: auth_hash[:extra][:raw_info][:avatar_url]
+    	)
 
     # instead of below
 	  # @user = User.find_by_provider_and_uid(auth_hash[:provider], auth_hash[:uid]) || User.create_from_omniauth(auth_hash)

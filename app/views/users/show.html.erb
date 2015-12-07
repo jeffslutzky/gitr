@@ -5,14 +5,14 @@
 
 
 <p>
+<img src="<%= @user.avatar_url %>" width=150>
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @user.name %>
 </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
 
 <p>
   <strong>Github ID:</strong>
@@ -21,7 +21,7 @@
 
 <p>
 	<strong>Projects:</strong>
-<!-- Github.repos.list user: "jeffslutzky" -->
+
 	<ol>
 	<% @user.admin.projects.each do |project| %>
 		<li><%= link_to project.name, project%></li>

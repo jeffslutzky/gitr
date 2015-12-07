@@ -37,7 +37,7 @@ class MilestonesController < ApplicationController
       if @milestone.save
 
         #Create New Milestone on Github API (Post Request)
-        github = Github.new user: 'benstew', repo:"#{@project.name}"
+        github = Github.new user: current_user.username, repo:"#{@project.name}"
         github.oauth_token = session["user_token"]
 
         github.issues.milestones.create title: "#{@milestone.title}",
