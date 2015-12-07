@@ -13,9 +13,10 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <!--  <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-       <li class="dropdown">
+         <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
+        <li><%= link_to "User Directory", users_path %></li>
+        <li><%= link_to "Project Directory", projects_path %></li>
+       <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Action</a></li>
@@ -41,14 +42,9 @@
       <li><%= link_to 'Log out', logout_path %></li>
       <% else %>
       	<li><%= link_to 'Log in with Github', login_path %></li>
-      <% end %>	
+      <% end %>
         <!--<li><a href="#">Link</a></li>-->
       </ul>
     </div>
   </div>
 </nav>
-
-
-
-
-  
