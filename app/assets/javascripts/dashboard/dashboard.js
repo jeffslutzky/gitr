@@ -3,6 +3,8 @@ $(function(){
     url: '/projects/dashboard',
     dataType: 'json'
   }).success(function(data){
-    $('#projects_board').append(data.template)
+    var source   = $("#entry-template").html();
+		var template = Handlebars.compile(source);
+    $('#projects_board').append(template({projects: data}));
   });
 })

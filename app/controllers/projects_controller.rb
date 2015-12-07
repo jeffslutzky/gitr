@@ -7,8 +7,7 @@ class ProjectsController < ApplicationController
 
   def dashboard
     @projects = current_user.collaborator.projects
-    data = {template: "<div>#{current_user.name} has contributed to #{@projects.count} projects!</div>"}
-    render :json => data
+    render :json => @projects
   end
 
   def show
