@@ -38,7 +38,8 @@
 </div>
 
 <% if logged_in? && current_user.id == @project.admin_id %>
-	<%= link_to 'Edit', edit_project_path(@project) %> |
+  <%= link_to 'New', new_project_milestone_path(@project) %> |
+  <%= link_to 'Edit', edit_project_path(@project) %> |
 <% end %>
 
 <%= link_to 'Back', projects_path %>
