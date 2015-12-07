@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  root 'users#index'
+  root 'application#root'
+  get '/projects/dashboard' => 'projects#dashboard'
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'
