@@ -1,34 +1,27 @@
 class MilestonesController < ApplicationController
   before_action :set_milestone, only: [:show, :edit, :update, :destroy]
 
-  # GET /milestones
-  # GET /milestones.json
   def index
     @milestones = Milestone.all
     @project = Project.find(params[:project_id])
   end
 
-  # GET /milestones/1
-  # GET /milestones/1.json
   def show
     @milestone = Milestone.find(params[:id])
     @project = Project.find(params[:project_id])
   end
 
-  # GET /milestones/new
   def new
     @milestone = Milestone.new
     @project = Project.find(params[:project_id])
   end
 
-  # GET /milestones/1/edit
   def edit
     @milestone = Milestone.find(params[:id])
     @project = Project.find(params[:project_id])
   end
 
-  # POST /milestones
-  # POST /milestones.json
+
   def create
     @milestone = Milestone.new(milestone_params)
     @project = Project.find(params[:project_id])
@@ -41,7 +34,7 @@ class MilestonesController < ApplicationController
         github.oauth_token = session["user_token"]
 
         github.issues.milestones.create title: "#{@milestone.title}",
-          state: "#{@milestone.state}",
+          # state: "#{@milestone.state}",
           description: "#{@milestone.description}"
             #   due_on: "Time"
 
@@ -55,8 +48,7 @@ class MilestonesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /milestones/1
-  # PATCH/PUT /milestones/1.json
+
   def update
     respond_to do |format|
       if @milestone.update(milestone_params)
@@ -69,8 +61,7 @@ class MilestonesController < ApplicationController
     end
   end
 
-  # DELETE /milestones/1
-  # DELETE /milestones/1.json
+
   def destroy
     @milestone.destroy
     respond_to do |format|
@@ -87,6 +78,6 @@ class MilestonesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def milestone_params
-      params.require(:milestone).permit(:title, :description, :state, :project_id)
+      params.require(:milestone).permit(:title, :description, :state)
     end
 end
