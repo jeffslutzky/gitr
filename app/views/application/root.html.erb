@@ -1,26 +1,29 @@
 <script src="dashboard/dashboard.js"></script>
 <script id="entry-template" type="text/x-handlebars-template">
-
-<h1>Dashboard</h1>
-
-<h2>Your Projects</h2>
-<ul>
-{{#each projects as |project|}}
-	<li>{{ project.name }}</li>
-{{/each}}
-</ul>
-
+	<h1>Dashboard</h1>
+	<h2>Your Projects</h2>
+	<ul>
+	{{#each projects as |project|}}
+		<li>{{ project.name }}</li>
+	{{/each}}
+	</ul>
 </script>
 
 
 <% if logged_in? %>
-<div id="projects_board"></div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-3">
+
+			<div id="projects_board"></div>
+
+		</div>
+	</div>
+</div>
 
 
 
 
 
 
-<% else %>
-<h1>Sign up or log in to Gitr!</h1>
 <% end %>
