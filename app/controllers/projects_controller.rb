@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
   end
-
+ # render_to_string(:action => "show.html.erb", :layout => false)
   def dashboard
     @projects = current_user.collaborator.projects
     render :json => @projects
@@ -15,7 +15,14 @@ class ProjectsController < ApplicationController
     github = Github.new user: current_user.username, repo:"#{@project.name}"
     github.oauth_token = session["user_token"]
     @repo_events = github.activity.events.public
-
+    #binding.pry
+    respond_to do |format|
+      format.html { render :show }
+      format.json { 
+        html_string = render_to_string 'show.html.erb', layout: false
+        render json: {template: html_string} 
+      }
+    end
   end
 
   def new

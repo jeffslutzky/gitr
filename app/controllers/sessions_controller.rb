@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
 
         github_repos = github.repos.list user: "#{login_name}"
 				github_repos.each do |repo|
-				binding.pry
+		
 					if !@user.admin.projects.find_by(github_repo_id: repo.id)
             collaborators = github.repos.collaborators.all  repo.owner.login, repo.name
 						assign_attributes_to_repo(repo,collaborators)
