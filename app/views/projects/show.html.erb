@@ -5,6 +5,13 @@
   <%= @project.name %>
 </p>
 
+<% if @project.description %>
+  <p>
+    <strong>Description:</strong>
+    <%= @project.description %>
+  </p>
+<% end %>
+
 <p>
   <strong>Github:</strong>
   <%= @project.github_repo_id %>
