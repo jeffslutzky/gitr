@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
     admin = user.build_admin
     admin.save
     collaborator = user.build_collaborator
-    collaborator.save
+    # collaborator.save
 	end
 
 	def self.find_or_create_from_api(project,collaborator_hash)
