@@ -66,4 +66,9 @@ class User < ActiveRecord::Base
 		# 						.where(collaborators.id)
 	end
 
+  def numberOfProject
+    numbProject = self.admin.projects.count
+  end
+
+
 end
