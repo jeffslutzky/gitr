@@ -21,8 +21,9 @@ class User < ActiveRecord::Base
 	has_many :projects, through: :collaborator
 
 	validates :name, presence: true
-
-
+  #validates :email, uniqueness: true 
+   #allow_nil: true
+  
 	def self.create_from_omniauth(auth_hash)
 	  user = self.create(
 	  	provider: auth_hash[:provider],
@@ -62,8 +63,6 @@ class User < ActiveRecord::Base
 			project.collaborators.each{|collaborator| arr << collaborator.user}
 		end.flatten.uniq
 
-		# Collaborator.group('collaborators.id').select('collaborators.*,where(collaborators_projects.collaborator_id=1) as users_projects').joins(:projects).where(collaborator.id: user.collaborator.id)
-		# 						.where(collaborators.id)
 	end
 
   def numberOfProject

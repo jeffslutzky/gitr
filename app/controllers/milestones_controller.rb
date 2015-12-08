@@ -25,6 +25,9 @@ class MilestonesController < ApplicationController
   def create
     @milestone = Milestone.new(milestone_params)
     @project = Project.find(params[:project_id])
+    @milestone.project = @project
+    @milestone.collaborator = current_user.collaborator
+
 
     respond_to do |format|
       if @milestone.save

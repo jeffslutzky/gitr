@@ -14,37 +14,26 @@ class SessionsController < ApplicationController
     	avatar_url: auth_hash[:extra][:raw_info][:avatar_url]
     	)
 
-    # instead of below
-	  # @user = User.find_by_provider_and_uid(auth_hash[:provider], auth_hash[:uid]) || User.create_from_omniauth(auth_hash)
 	  if @user
-	      session[:user_id] = @user.id
-	      session[:user_token] = auth_hash[:credentials][:token]
+      session[:user_id] = @user.id
+      session[:user_token] = auth_hash[:credentials][:token]
 
-				github = Github.new
-				github.current_options[:client_id] = ENV["GITHUB_KEY"]
-				github.current_options[:client_secret] = ENV["GITHUB_SECRET"]
-        github.current_options[:oauth_token] = session[:user_token]
-        # github.current_options[:per_page] = 100
+			github = Github.new
+			github.current_options[:client_id] = ENV["GITHUB_KEY"]
+			github.current_options[:client_secret] = ENV["GITHUB_SECRET"]
+      github.current_options[:oauth_token] = session[:user_token]
 
+			login_name = auth_hash[:extra][:raw_info][:login]
 
-
-        # github.repos.collaborators.all  'reubenson', 'hangman'
-
-				login_name = auth_hash[:extra][:raw_info][:login]
-
-        # github_repos = github.repos.list user: "#{login_name}", per_page: 100
-        github_repos = github.repos.list user: login_name, per_page: 100
-				github_repos.each do |repo|
-
-					if !@user.admin.projects.find_by(github_repo_id: repo.id)
-            collaborators = github.repos.collaborators.all  repo.owner.login, repo.name
-						assign_attributes_to_repo(repo,collaborators)
-					end
+      github_repos = github.repos.list user: login_name, per_page: 100
+			github_repos.each do |repo|
+				if !@user.admin.projects.find_by(github_repo_id: repo.id)
+          collaborators = github.repos.collaborators.all  repo.owner.login, repo.name
+					assign_attributes_to_repo(repo,collaborators)
 				end
-	      redirect_to user_path(current_user)
-	  else
-	       redirect_to root_url
+			end
 	  end
+  	redirect_to root_url
 	end
 
 	def assign_attributes_to_repo(repo,collaborators)
