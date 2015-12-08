@@ -16,13 +16,21 @@
     <%= f.text_field :name %>
   </div>
 
-   <div class="field">
+  <div class="field">
     <%= f.label :status %><br>
-
     <%= f.radio_button :active, true, :checked => (@project.active), :value => true%> Active</br>
     <%= f.radio_button :active, false, :checked => (!@project.active), :value => true%> Inactive</br>
-
   </div>
+
+  <!-- add collaborators -->
+
+  <div>
+    <%= f.label :collaborators %><br>
+  <p><% @project.collaborators.each do |collaborator| %>
+    <li><%= collaborator.user.name %></li>
+  <% end %></p>
+  </div>
+
 
   <div class="actions">
     <%= f.submit %>

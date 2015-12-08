@@ -1,6 +1,14 @@
-<h1>Editing Project</h1>
+<h1>Edit This Project</h1>
 
-<%= render 'form' %>
+<% if current_user.admin == @project.admin %>
 
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+	<%= render 'form' %>
+
+	<%= link_to 'Show', @project %> |
+	<%= link_to 'Back', projects_path %>
+
+<% else %>
+
+	You must be this project's administrator in order to edit this project.
+
+<% end %>
