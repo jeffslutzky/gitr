@@ -79,7 +79,7 @@
       <% @repo_events.each do |event| %>
         <p>
             <li><strong>Event Type: <%= event.type %></strong></li>
-            Date: <%= event.created_at %>
+            <%= DateTime.parse(event.created_at).httpdate %> 
         </p>
       <% end %>
     </ol>
