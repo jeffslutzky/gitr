@@ -27,10 +27,15 @@
   <div>
     <%= f.label :collaborators %><br>
   <p><% @project.collaborators.each do |collaborator| %>
-    <li><%= collaborator.user.name %></li>
+    <li><%= link_to collaborator.user.name, collaborator.user %></li>
   <% end %></p>
   </div>
 
+  <div>
+  <%= f.label :add_a_collaborator %>
+  <!-<%= f.collection_select :id, :name, include_blank: true %>
+
+  </div>
 
   <div class="actions">
     <%= f.submit %>
