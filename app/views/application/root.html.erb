@@ -4,7 +4,7 @@
 	<h2>Your Projects</h2>
 	<ul>
 
-	{{#each active_projects as |project|}}
+	{{#each projects as |project|}}
 		<li class="project-li" data-project-id="{{project.id}}">
 		 <a href="#">{{ project.name }}</a>
 		 </li>
@@ -37,15 +37,15 @@
 <% if logged_in? %>
 <div class="container">
 	<div class="row">
-
 		<div class="col-xs-3">
-			<div id="projects-board"></div>
-		</div>
-	
-		<div class="col-xs-9">
-      <div id="project-details"></div>
-		</div>
 
+			<div id="projects-board"></div>
+
+		</div>
+		<div class= "col-xs-9">
+      <div id="project-details"></div>
+
+		</div>
 	</div>
 </div>
 
