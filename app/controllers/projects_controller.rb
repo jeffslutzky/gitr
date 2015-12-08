@@ -6,8 +6,12 @@ class ProjectsController < ApplicationController
   end
  # render_to_string(:action => "show.html.erb", :layout => false)
   def dashboard
-    @projects = current_user.collaborator.projects
+    @projects = current_user.collaborator.projects.active
     render :json => @projects
+  end
+
+  def active
+      
   end
 
   def show
