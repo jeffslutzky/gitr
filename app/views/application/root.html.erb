@@ -1,9 +1,9 @@
-<script src="dashboard/dashboard.js"></script>
+<script src="javascripts/dashboard/dashboard.js"></script>
 <script id="entry-template" type="text/x-handlebars-template">
 	<h1>Dashboard</h1>
 	<h2>Your Projects</h2>
 	<ul>
-	
+
 	{{#each projects as |project|}}
 		<li class="project-li" data-project-id="{{project.id}}">
 		 <a href="#">{{ project.name }}</a>
@@ -38,9 +38,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-3">
-   
+
 			<div id="projects-board"></div>
-      
+
 		</div>
 		<div class= "col-xs-9">
       <div id="project-details"></div>
@@ -49,9 +49,16 @@
 	</div>
 </div>
 
+<% else %>
 
+	<div id="front-page">
+		<%= image_tag "github_workspace.jpg" %>
 
+		<div class="jumbotron" id="greeting">
+			<h1>Welcome to Gitr!</h1>
+		  <p>A web application to manage all your GitHub projects!</p>
+		</div>
 
-
+	</div>
 
 <% end %>

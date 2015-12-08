@@ -1,0 +1,24 @@
+#front-page img {
+  margin-top: -100px;
+  width: 100%;
+}
+
+#greeting {
+  // position:absolute;
+  margin-top:-30px;
+  margin-bottom: -30px;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+}
+
+h1 {
+  text-align: center;
+  opacity: 1.0;
+}
+
+nav {
+  opacity: 0.8;
+}

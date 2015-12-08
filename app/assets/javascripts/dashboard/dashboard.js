@@ -9,9 +9,8 @@ $(function(){
   });
 })
 
-
 $(document).on("click", ".project-li", function (){
- 
+
   var project_id = this.dataset.projectId;
   $.ajax({
     url: '/projects/' + project_id,
@@ -22,13 +21,3 @@ $(document).on("click", ".project-li", function (){
   $('#project-details').append(data.template);
   });
 })
-
-
-
-// $().beforeReady(function() {});
-
-// $("button").click(function(){
-//     $.ajax({url: "demo_test.txt", success: function(result){
-//         $("#div1").html(result);
-//     }});
-// });

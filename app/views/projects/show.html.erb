@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Project Name:</strong>
   <%= @project.name %>
 </p>
 
@@ -13,14 +13,22 @@
 <% end %>
 
 <p>
-  <strong>Github:</strong>
-  <%= @project.github_repo_id %>
+  <strong>Github URL:</strong>
+  <a href="<%= @project.url %>"><%= @project.url %></a>
 </p>
 
+
+
+<% if logged_in? && current_user.admin.id == @project.admin_id %>
+  <p> You're the admin for this project! </p>
+  <td><%= link_to 'Edit', edit_project_path(@project) %></td>
+<% else %>
 <p>
   <strong>Admin:</strong>
   <%= link_to @project.admin.user.name, @project.admin.user %>
 </p>
+<% end %>
+
 <div id="collaborators">
   <h3>Collaborators:</h3>
   <ul>
