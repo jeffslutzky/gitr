@@ -27,9 +27,12 @@ class Milestone < ActiveRecord::Base
   	project.milestones.order(created_at: :desc).first
   end
 
-  def latest_milestone_created_by_collaborator(collaborator)
+  def newest_milestone_created_by_collaborator(collaborator)
   	collaborator.milestones.order(created_at: :desc).first
   end
 
+  def self.newest_milestone_on_site
+  	self.all.order(created_at: :desc).first
+  end
 
 end
