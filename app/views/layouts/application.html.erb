@@ -10,10 +10,13 @@
 
 
 <%= render "layouts/navbar" %>
-
-<div class="container">
-<%= yield %>
-</div>
+<% if request.env["PATH_INFO"] != '/' %>
+  <div class="container">
+<% end %>
+    <%= yield %>
+<% if request.env["PATH_INFO"] != '/' %>
+  </div>
+<% end %>
 
 </body>
 </html>
