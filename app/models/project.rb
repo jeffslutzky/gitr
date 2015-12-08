@@ -24,9 +24,16 @@ class Project < ActiveRecord::Base
 
 	def self.with_the_most_collaborators
 		# Project.select('projects.*,count(collaborators.id) as collaborators_count').joins(:collaborators).group('projects.id').order('collaborators_count desc limit 1')
+		# Project.group('projects.id')
+		# 			 .select('projects.*,count(collaborators.id) as collaborators_count')
+		# 			 .joins(:collaborators).order('collaborators_count desc limit 1')[0]
+		self.sort_by_number_of_collaborators.first
+	end
+
+	def self.sort_by_number_of_collaborators
 		Project.group('projects.id')
 					 .select('projects.*,count(collaborators.id) as collaborators_count')
-					 .joins(:collaborators).order('collaborators_count desc limit 1')[0]
+					 .joins(:collaborators).order('collaborators_count desc')
 	end
 
 end
