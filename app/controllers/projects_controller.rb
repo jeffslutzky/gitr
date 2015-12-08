@@ -10,9 +10,7 @@ class ProjectsController < ApplicationController
     render :json => @projects
   end
 
-  def active
-      
-  end
+
 
   def show
     # Showing all events from a repo for an activity feed

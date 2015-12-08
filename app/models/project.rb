@@ -23,17 +23,21 @@ class Project < ActiveRecord::Base
 	delegate :user, to: :admin
 
 	def self.with_the_most_collaborators
-		# Project.select('projects.*,count(collaborators.id) as collaborators_count').joins(:collaborators).group('projects.id').order('collaborators_count desc limit 1')
-		# Project.group('projects.id')
-		# 			 .select('projects.*,count(collaborators.id) as collaborators_count')
-		# 			 .joins(:collaborators).order('collaborators_count desc limit 1')[0]
 		self.sort_by_number_of_collaborators.first
 	end
 
 	def self.sort_by_number_of_collaborators
-		Project.group('projects.id')
+		self.group('projects.id')
 					 .select('projects.*,count(collaborators.id) as collaborators_count')
 					 .joins(:collaborators).order('collaborators_count desc')
 	end
+
+	def self.active
+    self.where(active: true)
+  end
+
+  def self.inactive
+    self.where(active: false)
+  end
 
 end
