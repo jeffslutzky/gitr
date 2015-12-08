@@ -12,6 +12,7 @@ class Collaborator < ActiveRecord::Base
 
 	has_many :collaborators_projects
 	has_many :projects, through: :collaborators_projects
+	has_many :milestones
 	belongs_to :user
 
 	def projects_ordered_by_date_desc

@@ -63,8 +63,6 @@ class User < ActiveRecord::Base
 			project.collaborators.each{|collaborator| arr << collaborator.user}
 		end.flatten.uniq
 
-		# Collaborator.group('collaborators.id').select('collaborators.*,where(collaborators_projects.collaborator_id=1) as users_projects').joins(:projects).where(collaborator.id: user.collaborator.id)
-		# 						.where(collaborators.id)
 	end
 
 end
