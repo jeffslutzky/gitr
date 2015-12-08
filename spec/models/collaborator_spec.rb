@@ -19,16 +19,16 @@ RSpec.describe Collaborator, type: :model do
 
 		it "can be added to a project" do
 			project.collaborators << collaborator
-			binding.pry
 			expect(collaborator.projects).to include project
 		end
 	end
 
-	describe "#collaborator's projects ordered by date"
+	describe "#collaborator's projects ordered by date" do
 		let(:collaborator) { Collaborator.create}
 		let(:project1) { Project.create(created_at: Date.new(2015,6,3) ) }
 		let(:project2) { Project.create(created_at: Date.new(2014,12,11) ) }
 		let(:project3) { Project.create(created_at: Date.new(2015,6,4) ) }
+
 		it "has projects ordered by date created" do
 			collaborator.projects = [project1,project2,project3]
 			expect(collaborator.projects_ordered_by_date_desc).to eq [project3,project1,project2]
