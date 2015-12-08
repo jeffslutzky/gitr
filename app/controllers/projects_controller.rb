@@ -49,6 +49,7 @@ class ProjectsController < ApplicationController
 
   def update
     binding.pry
+    # add a collaborator: User.find(params[:project][:user])
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
