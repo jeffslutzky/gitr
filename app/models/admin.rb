@@ -16,4 +16,5 @@ class Admin < ActiveRecord::Base
 	def self.sort_by_number_of_projects
 		Admin.select('admins.*, count(projects.id) as project_count').joins(:projects).group("admins.id").order('project_count desc')
 	end
+
 end

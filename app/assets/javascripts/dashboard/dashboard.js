@@ -16,7 +16,6 @@ $(document).on("click", ".project-li", function (){
     url: '/projects/' + project_id,
     dataType: 'json'
   }).success(function(data){
-    debugger;
   $('#project-details').html("");
   $('#project-details').append(data.template);
   });
