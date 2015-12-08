@@ -14,7 +14,7 @@
 class Milestone < ActiveRecord::Base
   belongs_to :project
   belongs_to :collaborator
-  # validation  
+
   validates :title, presence: true
   validates :title, length: { minimum: 3 }
   validates :description, length: { maximum: 500 }
@@ -34,5 +34,7 @@ class Milestone < ActiveRecord::Base
   def self.newest_milestone_on_site
   	self.all.order(created_at: :desc).first
   end
+
+ 
 
 end
