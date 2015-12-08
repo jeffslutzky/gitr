@@ -47,6 +47,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    binding.pry
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -74,6 +75,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :github_id, :admin_id)
+      params.require(:project).permit(:name, :github_id, :admin_id, :active)
     end
 end

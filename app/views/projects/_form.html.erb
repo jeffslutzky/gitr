@@ -16,6 +16,14 @@
     <%= f.text_field :name %>
   </div>
 
+   <div class="field">
+    <%= f.label :status %><br>
+
+    <%= f.radio_button :active, true, :checked => (@project.active), :value => true%> Active</br>
+    <%= f.radio_button :active, false, :checked => (!@project.active), :value => true%> Inactive</br>
+
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
