@@ -50,6 +50,11 @@ class ProjectsController < ApplicationController
   def update
     binding.pry
     # add a collaborator: User.find(params[:project][:user])
+    # ActiveRecord::AssociationTypeMismatch: Collaborator(#70284328101380) expected, got User(#70284324048520)
+    # new attempt: new_collaborator = Collaborator.find_by(user_id: User.find(params[:project][:user])) - success
+    # @project.collaborators.push(new_collaborator)
+    # next: associate them
+
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
