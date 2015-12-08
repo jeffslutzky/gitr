@@ -21,8 +21,9 @@ class User < ActiveRecord::Base
 	has_many :projects, through: :collaborator
 
 	validates :name, presence: true
-
-
+  #validates :email, uniqueness: true 
+   #allow_nil: true
+  
 	def self.create_from_omniauth(auth_hash)
 	  user = self.create(
 	  	provider: auth_hash[:provider],
