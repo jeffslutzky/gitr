@@ -4,12 +4,11 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
   end
- # render_to_string(:action => "show.html.erb", :layout => false)
+
   def dashboard
     @projects = current_user.collaborator.projects.active
     render :json => @projects
   end
-
 
 
   def show
