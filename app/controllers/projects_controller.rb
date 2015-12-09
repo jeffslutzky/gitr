@@ -13,12 +13,12 @@ class ProjectsController < ApplicationController
 
 
   def show
+
     if logged_in?
       # Showing all events from a repo for an activity feed
       github = Github.new user: current_user.username, repo:"#{@project.name}"
       github.oauth_token = session["user_token"]
       @repo_events = github.activity.events.public
-      #binding.pry
       respond_to do |format|
         format.html { render :show }
         format.json {
@@ -51,25 +51,23 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    binding.pry
-
-    if params[:project][:user] == ""
-      # prompt for the user's name via ajax
-
-      # create new user in database by pulling that named user from github
-    end
-
     new_collaborator = Collaborator.find_by(user_id: User.find(params[:project][:user]))
     @project.add_collaborator(new_collaborator)
 
-    respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
-      else
-        format.html { render :edit }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+    if !params[:mark_inactive] #normal mode
+      respond_to do |format|
+        if @project.update(project_params)
+          format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+          format.json { render :show, status: :ok, location: @project }
+        else
+          format.html { render :edit }
+          format.json { render json: @project.errors, status: :unprocessable_entity }
+        end
       end
+    else #handle specific ajax call from dashboard to mark inactive
+      @project.active = false
+      @project.save
+      render json: @project.id
     end
   end
 

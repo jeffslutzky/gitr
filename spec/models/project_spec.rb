@@ -85,4 +85,23 @@ RSpec.describe Project, type: :model do
 		end
 	end
 
+	describe "#project can have issues" do
+		let(:project1) { Project.create }
+		let(:project2) { Project.create }
+		let(:project3) { Project.create }
+		before(:each) {
+			3.times {project1.issues.create(title: "Feature")}
+			1.times {project2.issues.create(title: "Refactor")}
+			4.times {project3.issues.create(title: "Feature2")}
+		}
+
+		it "it has issues by association" do
+			expect(project1.issues.length).to eq 3
+		end
+
+		it "can be sorted by the number of issues" do
+			expect(Project.sort_by_number_of_issues).to eq [project3,project1,project2]
+		end
+	end
+
 end

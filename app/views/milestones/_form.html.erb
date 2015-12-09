@@ -1,4 +1,5 @@
 
+
 <%= form_for([@project, @milestone ]) do |f| %>
   <% if @milestone.errors.any? %>
     <div id="error_explanation">
@@ -20,7 +21,7 @@
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
- 
+
   <div class="actions">
     <%= f.submit %>
   </div>
