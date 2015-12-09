@@ -12,17 +12,19 @@ class ProjectsController < ApplicationController
 
 
   def show
-    # Showing all events from a repo for an activity feed
-    github = Github.new user: current_user.username, repo:"#{@project.name}"
-    github.oauth_token = session["user_token"]
-    @repo_events = github.activity.events.public
-    #binding.pry
-    respond_to do |format|
-      format.html { render :show }
-      format.json { 
-        html_string = render_to_string 'show.html.erb', layout: false
-        render json: {template: html_string} 
-      }
+    if logged_in?
+      # Showing all events from a repo for an activity feed
+      github = Github.new user: current_user.username, repo:"#{@project.name}"
+      github.oauth_token = session["user_token"]
+      @repo_events = github.activity.events.public
+      #binding.pry
+      respond_to do |format|
+        format.html { render :show }
+        format.json {
+          html_string = render_to_string 'show.html.erb', layout: false
+          render json: {template: html_string}
+        }
+      end
     end
   end
 

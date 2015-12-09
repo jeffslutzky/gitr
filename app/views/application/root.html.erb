@@ -1,9 +1,5 @@
 <script ></script>
 <script id="entry-template" type="text/x-handlebars-template" src="javascripts/dashboard/dashboard.js">
-	<h1>Dashboard</h1>
-	<h2>Your Projects</h2>
-	<ul>
-
 	{{#each projects as |project|}}
 		<li class="project-li" data-project-id="{{project.id}}">
 		 <a href="#">{{ project.name }}</a>
@@ -36,15 +32,16 @@
 
 <% if logged_in? %>
 <div class="container">
+	<h1>Dashboard</h1>
+
+	<ul>
 	<div class="row">
 		<div class="col-xs-3">
-
+			<h3>Your Projects</h2>
 			<div id="projects-board"></div>
-
 		</div>
 		<div class= "col-xs-9">
       <div id="project-details"></div>
-
 		</div>
 	</div>
 </div>
