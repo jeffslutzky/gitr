@@ -69,5 +69,9 @@ class User < ActiveRecord::Base
     numbProject = self.admin.projects.count
   end
 
+  def self.not_a_collaborator(project)
+  	Collaborator.all - project.collaborators
+  end
+  	
 
 end
