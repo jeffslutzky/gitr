@@ -1,8 +1,13 @@
 // Place all the styles related to the projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.pic-thumbnail {
-  margin: 5px;
-  padding: 10px;
-  width: 15px
+
+.hidden {
+	display: none;
+}
+.pic-thumbnail img{
+	width: 25%;
+  // margin: 5px;
+  // padding: 10px;
+  // width: 15px
 }

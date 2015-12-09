@@ -78,8 +78,6 @@ class User < ActiveRecord::Base
 		self.projects_and_number_of_collaborators.sort{|a,b| b[1] <=> a[1]}
 	end
 
-
-
 	def self.issues_since_logout(current_user)
 		#Shows all issues since a user logged out
 		lastlogout = current_user.lastlogout
@@ -90,5 +88,13 @@ class User < ActiveRecord::Base
 		lastlogout = current_user.lastlogout
 		Milestone.where('created_at > ?', lastlogout )
 	end
+
+  def self.not_a_collaborator(project)
+  	collaborators_array = Collaborator.all - project.collaborators
+  	user_array = collaborators_array.map do |collaborator|
+  		collaborator.user
+  	end
+		user_array
+  end
 
 end

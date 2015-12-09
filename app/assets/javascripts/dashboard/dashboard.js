@@ -6,7 +6,7 @@ $(function(){
     dataType: 'json'
   }).success(function(data){
     var source   = $("#entry-template").html();
-		var template = Handlebars.compile(source);
+    var template = Handlebars.compile(source);
     $('#projects-board').append(template({projects: data}));
   });
 })

@@ -1,4 +1,3 @@
-<script ></script>
 <script id="entry-template" type="text/x-handlebars-template" src="javascripts/dashboard/dashboard.js">
 	<div class="panel panel-success">
 	  <div class="panel-heading">
@@ -7,8 +6,8 @@
 		<ul class="list-group">
 		{{#each projects as |project|}}
 			<li class="project-li list-group-item" data-project-id="{{project.id}}">
-			 <a href="#">{{ project.name }}</a>
 			 <%= button_tag "x", {class: "btn-sm mark-inactive"}%>
+			 <a href="#">{{ project.name }}</a>
 			</li>
 		{{/each}}
 		</ul>

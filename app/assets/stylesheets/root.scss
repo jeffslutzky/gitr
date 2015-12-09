@@ -37,6 +37,15 @@ nav {
   color: white;
 }
 
-.active a {
+.btn a{
+  text-decoration: none;
+}
+
+.btn-sm {
+  padding: 0px 5px;
+}
+
+li.active a {
   color: white;
+  font-weight: 700
 }

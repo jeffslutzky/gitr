@@ -51,6 +51,9 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    new_collaborator = Collaborator.find_by(user_id: User.find(params[:project][:user]))
+    @project.add_collaborator(new_collaborator)
+
     if !params[:mark_inactive] #normal mode
       respond_to do |format|
         if @project.update(project_params)
@@ -63,6 +66,7 @@ class ProjectsController < ApplicationController
       end
     else #handle specific ajax call from dashboard to mark inactive
       @project.active = false
+      @project.save
       render json: @project.id
     end
   end
@@ -83,6 +87,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :github_id, :admin_id, :active)
+      params.require(:project).permit(:name, :github_id, :admin_id, :active, :new_collab)
     end
 end

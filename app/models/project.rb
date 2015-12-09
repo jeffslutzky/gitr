@@ -28,7 +28,6 @@ class Project < ActiveRecord::Base
 	end
 
 	def self.sort_by_number_of_collaborators
-		binding.pry
 		self.group('projects.id')
 				.select('projects.*,count(collaborators.id) as collaborators_count')
 				.joins(:collaborators)
@@ -43,6 +42,10 @@ class Project < ActiveRecord::Base
     self.where(active: false)
   end
 
+  def add_collaborator(collaborator)
+    self.collaborators.push(collaborator)
+  end
+
 	def self.sort_by_number_of_issues
 		self.select('projects.*, count(issues.id) as issues_count')
 			.joins(:issues)
@@ -51,7 +54,6 @@ class Project < ActiveRecord::Base
 	end
 
 	def self.name_and_number_of_collaborators
-		# binding.pry
 		self.group('projects.name').select('project.name').joins(:collaborators).count('collaborators.id')
 	end
 
