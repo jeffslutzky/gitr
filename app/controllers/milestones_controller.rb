@@ -29,7 +29,6 @@ class MilestonesController < ApplicationController
     @milestone.project = @project
     @milestone.collaborator = current_user.collaborator
 
-
     respond_to do |format|
       if @milestone.save
 
@@ -41,7 +40,6 @@ class MilestonesController < ApplicationController
           # state: "#{@milestone.state}",
           description: "#{@milestone.description}"
             #   due_on: "Time"
-
 
         format.html { redirect_to project_milestone_path(@project, @milestone), notice: 'Milestone was successfully created.' }
         format.json { render :show, status: :created, location: project_milestone_path }
