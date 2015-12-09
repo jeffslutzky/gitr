@@ -7,9 +7,11 @@
 <p id="notice"><%= notice %></p>
 
 
-<p>
-<img src="<%= @user.avatar_url %>" width=150>
-</p>
+<% if @user.avatar_url %>
+  <p>
+  <img src="<%= @user.avatar_url %>" width=150>
+  </p>
+<% end %>
 
 <!-- <p>
   <strong>Name:</strong>
@@ -28,7 +30,7 @@
 	<strong>Projects:</strong>
 
 	<ol>
-	<% @user.admin.projects.each do |project| %>
+	<% @user.projects.each do |project| %>
 		<li><%= link_to project.name, project%></li>
 	<% end %>
 	</ol>

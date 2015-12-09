@@ -11,6 +11,7 @@
 #  updated_at :datetime         not null
 #  username   :string
 #  avatar_url :string
+#  lastlogout :datetime
 #
 
 require 'rails_helper'

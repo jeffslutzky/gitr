@@ -1,15 +1,18 @@
-<script src="javascripts/dashboard/dashboard.js"></script>
-<script id="entry-template" type="text/x-handlebars-template">
-	<h1>Dashboard</h1>
-	<h2>Your Projects</h2>
-	<ul>
+<script ></script>
+<script id="entry-template" type="text/x-handlebars-template" src="javascripts/dashboard/dashboard.js">
+	<div class="panel panel-success">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Active Projects</h3>
+	  </div>
+		<ul class="list-group">
+		{{#each projects as |project|}}
+			<li class="project-li list-group-item" data-project-id="{{project.id}}">
+			 <a href="#">{{ project.name }}</a>
+			 </li>
+		{{/each}}
+		</ul>
+</div>
 
-	{{#each projects as |project|}}
-		<li class="project-li" data-project-id="{{project.id}}">
-		 <a href="#">{{ project.name }}</a>
-		 </li>
-	{{/each}}
-	</ul>
 </script>
 <script id= "project-details-template" type="text/x-handlebars-template">
   <p>
@@ -35,15 +38,24 @@
 </script>
 
 <% if logged_in? %>
+
 <div class="container">
+	<ul>
 	<div class="row">
 		<div class="col-xs-3">
-
 			<div id="projects-board"></div>
-
 		</div>
 		<div class= "col-xs-9">
       <div id="project-details"></div>
+
+			<ul>
+				<strong><h2>Issues since last logout</h2></strong>
+				<% issues = User.issues_since_logout(current_user)%>
+					<% issues.each do |issue| %>
+					<% date = issue.updated_at.to_s %>
+					<li><strong><%= issue.title %></strong> created @ <%= DateTime.parse(date).httpdate %></li>
+					<% end %>
+			</ul>
 
 		</div>
 	</div>

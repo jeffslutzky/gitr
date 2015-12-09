@@ -11,6 +11,7 @@
 #  updated_at :datetime         not null
 #  username   :string
 #  avatar_url :string
+#  lastlogout :datetime
 #
 
 class User < ActiveRecord::Base
@@ -43,15 +44,15 @@ class User < ActiveRecord::Base
 		@user = User.find_by(uid: collaborator_hash[:id])
 		if !@user
 			@user = User.create({
-				# name is not provided in collaborator_hash
-				# setting name to login instead to pass user validations
 				name: collaborator_hash[:login],
-				# login is provided in collaborator_hash, but is not in our users table
+				username: collaborator_hash[:login],
 				uid: collaborator_hash[:id]
 			})
 			@user.build_admin
-			@user.build_collaborator
 			@user.admin.save
+			@user.build_collaborator
+			# collaborator.projects << project
+			# collaborator.save
 			@user.collaborator.save
 		end
 		project.collaborators << @user.collaborator
@@ -78,5 +79,16 @@ class User < ActiveRecord::Base
 	end
 
 
+
+	def self.issues_since_logout(current_user)
+		#Shows all issues since a user logged out
+		lastlogout = current_user.lastlogout
+		Issue.where('created_at > ?', lastlogout )
+	end
+
+	def self.milestones_since_logout(current_user)
+		lastlogout = current_user.lastlogout
+		Milestone.where('created_at > ?', lastlogout )
+	end
 
 end

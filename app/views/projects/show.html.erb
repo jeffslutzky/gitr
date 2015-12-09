@@ -1,33 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Project Name:</strong>
-  <%= @project.name %>
-</p>
 
-<% if @project.description %>
-  <p>
-    <strong>Description:</strong>
-    <%= @project.description %>
-  </p>
-<% end %>
+<div id="project-title">
 
-<p>
-  <strong>Github URL:</strong>
-  <a href="<%= @project.url %>"><%= @project.url %></a>
-</p>
+  <h2><a href="<%= @project.url %>"><%= @project.name %></a>
+    <% if logged_in? && current_user.admin.id == @project.admin_id %>
+      <!-- <p> You're the admin for this project! </p> -->
+      <a href="<%= edit_project_path(@project) %>" class="btn btn-primary btn-sm">Edit Project</a>
 
+    <% else %>
+      <p>
+        <strong>Admin:</strong>
+        <%= link_to @project.admin.user.name, @project.admin.user %>
+      </p>
+    <% end %>
+  </h2>
 
+  <% if !@project.description.empty? %>
+    <p>
+      <strong>Description:</strong>
+      <%= @project.description %>
+    </p>
+  <% end %>
 
-<% if logged_in? && current_user.admin.id == @project.admin_id %>
-  <p> You're the admin for this project! </p>
-  <td><%= link_to 'Edit', edit_project_path(@project) %></td>
-<% else %>
-<p>
-  <strong>Admin:</strong>
-  <%= link_to @project.admin.user.name, @project.admin.user %>
-</p>
-<% end %>
+</div>
+
 
 <div id="collaborators">
   <h3>Collaborators:</h3>
@@ -40,32 +37,58 @@
   </ul>
 </div>
 
-<!--!!!!!!!!!!!!!!!!!!!!Milestones!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
-<div id="milestones">
-  <h3><%= link_to "Milestones:", project_milestones_path(@project) %></h3>
-  <ul>
-    <% @project.milestones.each do |milestone| %>
-      <li>
-        <td><%= link_to "#{milestone.title}", project_milestone_path(@project, milestone)%></td>
-        <p>Description: <%=milestone.description %></p>
-    </li>
+<div class="row">
+  <div class="col-xs-4">
+    <!--!!!!!!!!!!!!!!!!!!!!Milestones!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+    <div id="milestones">
+      <h3><%= link_to "Milestones:", project_milestones_path(@project) %></h3>
+      <ul>
+        <% @project.milestones.each do |milestone| %>
+          <li>
+            <td><%= link_to "#{milestone.title}", project_milestone_path(@project, milestone)%></td>
+            <p>Description: <%=milestone.description %></p>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <% if logged_in? && current_user.id == @project.admin_id %>
+      <%= link_to 'New Milestone', new_project_milestone_path(@project) %> |
     <% end %>
-  </ul>
-</div>
-<% if logged_in? && current_user.id == @project.admin_id %>
-  <%= link_to 'New Milestone', new_project_milestone_path(@project) %> |
-<% end %>
-
-<!--!!!!!!!!!!!!!!!!!!!!Issues!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
-<div id="issues">
-  <h3><%= link_to "Issues:", project_issues_path(@project) %></h3>
-  <ul>
-    <% @project.issues.each do |issue| %>
-      <li>
-        <td><%= link_to "#{issue.title}", project_issue_path(@project, issue)%></td>
-        <p>Description: <%=issue.body %></p>
-    </li>
+  </div>
+  <div class="col-xs-4">
+    <!--!!!!!!!!!!!!!!!!!!!!Issues!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+    <div id="issues">
+      <h3><%= link_to "Issues:", project_issues_path(@project) %></h3>
+      <ul>
+        <% @project.issues.each do |issue| %>
+          <li>
+            <td><%= link_to "#{issue.title}", project_issue_path(@project, issue)%></td>
+            <p>Description: <%=issue.body %></p>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <% if logged_in? && current_user.id == @project.admin_id %>
+      <%= link_to 'New Issue', new_project_issue_path(@project) %> |
     <% end %>
+  </div>
+  <div class="col-xs-4">
+    <% if logged_in? %>
+    <!--!!!!!!!!!!!!!!!!!!!!Feed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+    <div id="feed">
+      <h3>Activity Feed</h3>
+        <ol>
+          <% @repo_events.each do |event| %>
+            <p>
+                <li><strong>Event Type: <%= event.type %></strong></li>
+                <%= DateTime.parse(event.created_at).httpdate %>
+            </p>
+          <% end %>
+        </ol>
+    </div>
+    <% end %>
+  </div>
+=======
   </ul>
 </div>
 <% if logged_in? && current_user.id == @project.admin_id %>
@@ -79,10 +102,11 @@
       <% @repo_events.each do |event| %>
         <p>
             <li><strong>Event Type: <%= event.type %></strong></li>
-            <%= DateTime.parse(event.created_at).httpdate %> 
+            <%= DateTime.parse(event.created_at).httpdate %>
         </p>
       <% end %>
     </ol>
+>>>>>>> master
 </div>
 
 

@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+  <!-- limit project editing to admins only -->
+ 
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -23,6 +25,7 @@
   </div>
 
   <!-- add collaborators -->
+  <!-- let admin add collabs who aren't in the database -->
 
   <div>
     <%= f.label :collaborators %><br>
@@ -33,7 +36,7 @@
 
   <div>
   <%= f.label :add_a_collaborator %>
-  <!-<%= f.collection_select :id, :name, include_blank: true %>
+  <%= f.collection_select :user, User.all, :id, :name, :include_blank => "new user (not yet implemented)" %>
 
   </div>
 
