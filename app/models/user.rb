@@ -69,7 +69,6 @@ class User < ActiveRecord::Base
 	end
 
 
-
 	def self.issues_since_logout(current_user)
 		#Shows all issues since a user logged out
 		lastlogout = current_user.lastlogout
