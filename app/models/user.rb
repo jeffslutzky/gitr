@@ -11,6 +11,7 @@
 #  updated_at :datetime         not null
 #  username   :string
 #  avatar_url :string
+#  lastlogout :datetime
 #
 
 class User < ActiveRecord::Base
@@ -21,9 +22,9 @@ class User < ActiveRecord::Base
 	has_many :projects, through: :collaborator
 
 	validates :name, presence: true
-  #validates :email, uniqueness: true 
+  #validates :email, uniqueness: true
    #allow_nil: true
-  
+
 	def self.create_from_omniauth(auth_hash)
 	  user = self.create(
 	  	provider: auth_hash[:provider],
@@ -69,5 +70,16 @@ class User < ActiveRecord::Base
     numbProject = self.admin.projects.count
   end
 
+
+	def self.issues_since_logout(current_user)
+		#Shows all issues since a user logged out
+		lastlogout = current_user.lastlogout
+		Issue.where('created_at > ?', lastlogout )
+	end
+
+	def self.milestones_since_logout(current_user)
+		lastlogout = current_user.lastlogout
+		Milestone.where('created_at > ?', lastlogout )
+	end
 
 end

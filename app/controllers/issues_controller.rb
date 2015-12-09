@@ -11,6 +11,7 @@ class IssuesController < ApplicationController
   # GET /issues/1
   # GET /issues/1.json
   def show
+    binding.pry
     @project = Project.find(params[:project_id])
   end
 
@@ -42,7 +43,7 @@ class IssuesController < ApplicationController
 
         #Gathering milestone ID from new issues form
         milestone_id = params['issue']['milestones']
-  
+
         #Creating new issue on github with milestone ID
         github.issues.create title: "#{@issue.title}",
           body: "#{@issue.body}"

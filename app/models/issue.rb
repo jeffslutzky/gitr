@@ -13,17 +13,15 @@
 
 class Issue < ActiveRecord::Base
   belongs_to :project
-  #validation 
+  #validation
   validates :title, presence: true
   validates :title, length: { minimum: 3 }
-  validates :body, length: { maximum: 500 } 
-  
+  validates :body, length: { maximum: 500 }
+
 
   def milestones
     return 'no project' unless project
     project.milestones
   end
-
-  
 
 end

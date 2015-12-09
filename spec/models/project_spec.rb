@@ -10,6 +10,7 @@
 #  updated_at     :datetime         not null
 #  url            :string
 #  description    :text
+#  active         :boolean          default(TRUE)
 #
 
 require 'rails_helper'
