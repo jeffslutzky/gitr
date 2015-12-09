@@ -87,7 +87,7 @@ class IssuesController < ApplicationController
                # assignee: "octocat",
                # milestone: "#{milestone_id}"
      rescue Github::Error::ServiceError
-       #Rescuing from the github error
+       format.html { redirect_to project_issue_path(@project, @issue), notice: 'Issue has been saved on local but you do not have access to push to remote.' }
      end
 
         format.html { redirect_to project_issue_path(@project, @issue), notice: 'Milestone was successfully created.' }
@@ -98,6 +98,7 @@ class IssuesController < ApplicationController
       end
     end
   end
+
 
   # PATCH/PUT /issues/1
   # PATCH/PUT /issues/1.json
