@@ -1,5 +1,6 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
+  before_filter :require_login
 
   # GET /issues
   # GET /issues.json
@@ -42,7 +43,7 @@ class IssuesController < ApplicationController
 
         #Gathering milestone ID from new issues form
         milestone_id = params['issue']['milestones']
-  
+
         #Creating new issue on github with milestone ID
         github.issues.create title: "#{@issue.title}",
           body: "#{@issue.body}"

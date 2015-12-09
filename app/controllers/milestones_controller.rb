@@ -1,5 +1,6 @@
 class MilestonesController < ApplicationController
   before_action :set_milestone, only: [:show, :edit, :update, :destroy]
+  before_filter :require_login
 
   def index
     @milestones = Milestone.all

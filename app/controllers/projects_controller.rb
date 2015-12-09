@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_filter :require_login
 
   def index
     @projects = Project.all
@@ -19,9 +20,9 @@ class ProjectsController < ApplicationController
     #binding.pry
     respond_to do |format|
       format.html { render :show }
-      format.json { 
+      format.json {
         html_string = render_to_string 'show.html.erb', layout: false
-        render json: {template: html_string} 
+        render json: {template: html_string}
       }
     end
   end
