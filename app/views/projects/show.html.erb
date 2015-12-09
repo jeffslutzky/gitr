@@ -7,6 +7,7 @@
     <% if logged_in? && current_user.admin.id == @project.admin_id %>
       <!-- <p> You're the admin for this project! </p> -->
       <a href="<%= edit_project_path(@project) %>" class="btn btn-primary btn-sm">Edit Project</a>
+
     <% else %>
       <p>
         <strong>Admin:</strong>
@@ -70,7 +71,6 @@
     <% if logged_in? && current_user.id == @project.admin_id %>
       <%= link_to 'New Issue', new_project_issue_path(@project) %> |
     <% end %>
-<<<<<<< HEAD
   </div>
   <div class="col-xs-4">
     <% if logged_in? %>
