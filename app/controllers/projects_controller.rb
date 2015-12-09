@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
 
   def update
     new_collaborator = Collaborator.find_by(user_id: User.find(params[:project][:user]))
-    @project.collaborators.push(new_collaborator)
+    @project.add_collaborator(new_collaborator)
 
     respond_to do |format|
       if @project.update(project_params)
