@@ -37,7 +37,7 @@
 
   <div>
   <%= f.label :add_a_collaborator %>
-  <%= f.collection_select :user, User.all, :id, :name, :include_blank => "new user (not yet implemented)" %>
+  <%= f.collection_select :user, User.all, :id, :name %>
 
   </div>
 
