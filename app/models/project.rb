@@ -28,9 +28,11 @@ class Project < ActiveRecord::Base
 	end
 
 	def self.sort_by_number_of_collaborators
+		binding.pry
 		self.group('projects.id')
-					 .select('projects.*,count(collaborators.id) as collaborators_count')
-					 .joins(:collaborators).order('collaborators_count desc')
+				.select('projects.*,count(collaborators.id) as collaborators_count')
+				.joins(:collaborators)
+				.order('collaborators_count desc')
 	end
 
 	def self.active
@@ -40,5 +42,21 @@ class Project < ActiveRecord::Base
   def self.inactive
     self.where(active: false)
   end
+
+	def self.sort_by_number_of_issues
+		self.select('projects.*, count(issues.id) as issues_count')
+			.joins(:issues)
+			.group('projects.id')
+			.order('issues_count desc')
+	end
+
+	def self.name_and_number_of_collaborators
+		# binding.pry
+		self.group('projects.name').select('project.name').joins(:collaborators).count('collaborators.id')
+	end
+
+	def self.sort_projects_and_number_of_collaborators_desc
+		self.name_and_number_of_collaborators.sort{|a,b| b[1] <=> a[1]}
+	end
 
 end

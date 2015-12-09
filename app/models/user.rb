@@ -70,6 +70,15 @@ class User < ActiveRecord::Base
     numbProject = self.admin.projects.count
   end
 
+	def projects_and_number_of_collaborators
+		self.projects.group('projects.name').select('project.name').joins(:collaborators).count('collaborators.id')
+	end
+
+	def sort_projects_and_number_of_collaborators_desc
+		self.projects_and_number_of_collaborators.sort{|a,b| b[1] <=> a[1]}
+	end
+
+
 
 	def self.issues_since_logout(current_user)
 		#Shows all issues since a user logged out

@@ -8,7 +8,8 @@
 		{{#each projects as |project|}}
 			<li class="project-li list-group-item" data-project-id="{{project.id}}">
 			 <a href="#">{{ project.name }}</a>
-			 </li>
+			 <%= button_tag "x", {class: "btn-sm mark-inactive"}%>
+			</li>
 		{{/each}}
 		</ul>
 </div>
@@ -37,6 +38,16 @@
 
 </script>
 
+<!-- Send request to analytics controller -->
+<script>
+  $.ajax({
+    url: '/analytics/1',
+    dataType: 'json'
+  }).success(function(data){
+    draw(data)
+  })
+</script>
+
 <% if logged_in? %>
 
 <div class="container">
@@ -57,6 +68,11 @@
 					<% end %>
 			</ul>
 
+			<div class="dashboard-analytics">
+				<h3> Analytics </h3>
+				<h4> Number of collaborators on each project </h4>
+				<svg id="graph1"></svg>
+			</div>
 		</div>
 	</div>
 </div>
