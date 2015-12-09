@@ -37,15 +37,16 @@
 
   <div>
   <%= f.label :add_a_collaborator %>
-  <%= f.collection_select :user, User.not_a_collaborator(@project), :id, :name, :include_blank => "new user (not yet implemented)" %>
+  <%= f.collection_select :user, User.not_a_collaborator(@project), :id, :name %>
+<!-- , :include_blank => "new user (not yet implemented)"  -->
+
   </div>
 
-  <div id="new_collaborator">
+<!--  <div id="new_collaborator">
     <%= f.label :github_nickname_of_new_user %>
     <%= f.text_field :new_collab, :value => "" %>
-  </div>
+  </div> -->
 
-<!-- $("#new_collaborator").addClass("hidden") -->
 
   <div class="actions">
     <%= f.submit %>
