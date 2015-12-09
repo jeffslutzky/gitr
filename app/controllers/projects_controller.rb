@@ -48,7 +48,8 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    binding.pry
+    new_collaborator = Collaborator.find_by(user_id: User.find(params[:project][:user]))
+    @project.collaborators.push(new_collaborator)
 
     respond_to do |format|
       if @project.update(project_params)
