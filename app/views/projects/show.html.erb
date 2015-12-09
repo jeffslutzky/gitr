@@ -25,8 +25,6 @@
 </div>
 
 
-
-
 <div id="collaborators">
   <h3>Collaborators:</h3>
   <ul>
@@ -72,6 +70,7 @@
     <% if logged_in? && current_user.id == @project.admin_id %>
       <%= link_to 'New Issue', new_project_issue_path(@project) %> |
     <% end %>
+<<<<<<< HEAD
   </div>
   <div class="col-xs-4">
     <% if logged_in? %>
@@ -89,6 +88,25 @@
     </div>
     <% end %>
   </div>
+=======
+  </ul>
+</div>
+<% if logged_in? && current_user.id == @project.admin_id %>
+  <%= link_to 'New Issue', new_project_issue_path(@project) %> |
+<% end %>
+
+<!--!!!!!!!!!!!!!!!!!!!!Feed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+<div id="feed">
+  <h3>Activity Feed</h3>
+    <ol>
+      <% @repo_events.each do |event| %>
+        <p>
+            <li><strong>Event Type: <%= event.type %></strong></li>
+            <%= DateTime.parse(event.created_at).httpdate %>
+        </p>
+      <% end %>
+    </ol>
+>>>>>>> master
 </div>
 
 

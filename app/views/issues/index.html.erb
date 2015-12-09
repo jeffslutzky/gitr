@@ -19,17 +19,13 @@
       <tr>
         <td><%= issue.title %></td>
         <td><%= issue.body %></td>
-        <td><%= issue.milestone_id %></td>
         <td><%= issue.created_at %></td>
         <td><%= issue.closed_at %></td>
-        <td><%= link_to 'Show', issue %></td>
-        <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
-        <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', project_issue_path(@project, issue) %></td>
+        <td><%= link_to 'Edit', edit_project_issue_path(@project, issue) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Issue', new_issue_path %>

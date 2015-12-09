@@ -49,9 +49,11 @@ class SessionsController < ApplicationController
   end
 
 
-
-
 	def destroy
+    # !!!!!!!!!!!Capturing lastlogout to DB
+    user = User.find_by(uid: current_user.uid)
+    user.update_attribute(:lastlogout, Time.now)
+
 	  reset_session
 	  redirect_to root_url
 	end

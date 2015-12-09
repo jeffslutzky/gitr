@@ -11,6 +11,7 @@
 #  updated_at :datetime         not null
 #  username   :string
 #  avatar_url :string
+#  lastlogout :datetime
 #
 
 class User < ActiveRecord::Base
@@ -69,5 +70,16 @@ class User < ActiveRecord::Base
     numbProject = self.admin.projects.count
   end
 
+
+	def self.issues_since_logout(current_user)
+		#Shows all issues since a user logged out
+		lastlogout = current_user.lastlogout
+		Issue.where('created_at > ?', lastlogout )
+	end
+
+	def self.milestones_since_logout(current_user)
+		lastlogout = current_user.lastlogout
+		Milestone.where('created_at > ?', lastlogout )
+	end
 
 end
