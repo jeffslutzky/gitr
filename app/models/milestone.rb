@@ -13,9 +13,11 @@
 
 class Milestone < ActiveRecord::Base
   belongs_to :project
-  # validation  
+  # validation
   validates :title, presence: true
   validates :title, length: { minimum: 3 }
   validates :description, length: { maximum: 500 }
-  
+
+
+
 end

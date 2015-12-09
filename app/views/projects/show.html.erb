@@ -18,7 +18,6 @@
 </p>
 
 
-
 <% if logged_in? && current_user.admin.id == @project.admin_id %>
   <p> You're the admin for this project! </p>
   <td><%= link_to 'Edit', edit_project_path(@project) %></td>
@@ -79,7 +78,7 @@
       <% @repo_events.each do |event| %>
         <p>
             <li><strong>Event Type: <%= event.type %></strong></li>
-            <%= DateTime.parse(event.created_at).httpdate %> 
+            <%= DateTime.parse(event.created_at).httpdate %>
         </p>
       <% end %>
     </ol>

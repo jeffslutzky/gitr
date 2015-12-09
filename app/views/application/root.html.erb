@@ -45,9 +45,21 @@
 		<div class= "col-xs-9">
       <div id="project-details"></div>
 
+			<ul>
+				<strong><h2>Issues since last logout</h2></strong>
+				<% issues = User.issues_since_logout(current_user)%>
+					<% issues.each do |issue| %>
+					<!--Might want to incorporate updated at  -->
+					<% date = issue.created_at.to_s %>
+					<li><strong><%= issue.title %></strong> created @ <%= DateTime.parse(date).httpdate %></li>
+					<% end %>
+			</ul>
+
 		</div>
 	</div>
 </div>
+
+
 
 <% else %>
 
