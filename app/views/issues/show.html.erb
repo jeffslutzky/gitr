@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<div class="container">
 <p>
   <strong>Title:</strong>
   <%= @issue.title %>
@@ -17,4 +17,5 @@
 
 
 <%= link_to 'Edit', edit_project_issue_path(@project, @issue) %> |
-<%= link_to 'Back', project_issues_path %>
+<%= link_to 'Back', project_path(@project) %>
+</div>

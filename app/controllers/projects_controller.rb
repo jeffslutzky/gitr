@@ -18,6 +18,7 @@ class ProjectsController < ApplicationController
       # Showing all events from a repo for an activity feed
       github = Github.new user: current_user.username, repo:"#{@project.name}"
       github.oauth_token = session["user_token"]
+      binding.pry
       @repo_events = github.activity.events.public
       #binding.pry
       respond_to do |format|
