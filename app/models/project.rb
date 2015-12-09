@@ -41,4 +41,8 @@ class Project < ActiveRecord::Base
     self.where(active: false)
   end
 
+  def add_collaborator(collaborator)
+    self.collaborators.push(collaborator)
+  end
+
 end

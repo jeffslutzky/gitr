@@ -53,6 +53,15 @@ class ProjectsController < ApplicationController
   def update
     binding.pry
 
+    if params[:project][:user] == ""
+      # prompt for the user's name via ajax
+
+      # create new user in database by pulling that named user from github
+    end
+
+    new_collaborator = Collaborator.find_by(user_id: User.find(params[:project][:user]))
+    @project.add_collaborator(new_collaborator)
+
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -80,6 +89,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :github_id, :admin_id, :active)
+      params.require(:project).permit(:name, :github_id, :admin_id, :active, :new_collab)
     end
 end

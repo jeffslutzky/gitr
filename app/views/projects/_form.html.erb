@@ -26,6 +26,7 @@
 
   <!-- add collaborators -->
   <!-- let admin add collabs who aren't in the database -->
+  <!-- don't include in the dropdown menu those who are already on the project -->
 
   <div>
     <%= f.label :collaborators %><br>
@@ -36,9 +37,16 @@
 
   <div>
   <%= f.label :add_a_collaborator %>
-  <%= f.collection_select :user, User.all, :id, :name, :include_blank => "new user (not yet implemented)" %>
+  <%= f.collection_select :user, User.not_a_collaborator(@project), :id, :name %>
+<!-- , :include_blank => "new user (not yet implemented)"  -->
 
   </div>
+
+<!--  <div id="new_collaborator">
+    <%= f.label :github_nickname_of_new_user %>
+    <%= f.text_field :new_collab, :value => "" %>
+  </div> -->
+
 
   <div class="actions">
     <%= f.submit %>
