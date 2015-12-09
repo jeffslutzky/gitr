@@ -70,8 +70,11 @@ class User < ActiveRecord::Base
   end
 
   def self.not_a_collaborator(project)
-  	Collaborator.all - project.collaborators
+  	collaborators_array = Collaborator.all - project.collaborators
+  	user_array = collaborators_array.map do |collaborator|
+  		collaborator.user
+  	end
+		user_array
   end
   	
-
 end
