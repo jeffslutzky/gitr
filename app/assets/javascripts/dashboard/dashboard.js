@@ -1,3 +1,5 @@
+var last_clicked_item = null;
+
 $(function(){
   $.ajax({
     url: '/projects/dashboard',
@@ -10,13 +12,33 @@ $(function(){
 })
 
 $(document).on("click", ".project-li", function (){
+  $(this).addClass('active')
+
 
   var project_id = this.dataset.projectId;
   $.ajax({
     url: '/projects/' + project_id,
     dataType: 'json'
   }).success(function(data){
-  $('#project-details').html("");
-  $('#project-details').append(data.template);
+    $('#project-details').html("");
+    $('#project-details').append(data.template);
+  });
+
+  if (last_clicked_item) {
+    $(last_clicked_item).removeClass('active')
+  }
+  last_clicked_item = this;
+})
+
+$(document).on("click", ".mark-inactive", function (){
+  var project_id = $(this).parent()[0].dataset.projectId;
+  $.ajax({
+    url: '/projects/' + project_id,
+    method: 'patch',
+    data: {mark_inactive: true},
+    dataType: 'json'
+  }).success(function(data){
+    var el = $('.project-li[data-project-id='+data+']')
+    el.remove();
   });
 })

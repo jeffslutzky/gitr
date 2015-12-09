@@ -8,7 +8,8 @@
 		{{#each projects as |project|}}
 			<li class="project-li list-group-item" data-project-id="{{project.id}}">
 			 <a href="#">{{ project.name }}</a>
-			 </li>
+			 <%= button_tag "x", {class: "btn-sm mark-inactive"}%>
+			</li>
 		{{/each}}
 		</ul>
 </div>
