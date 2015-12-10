@@ -10,6 +10,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  collaborator_id :integer
+#  date            :datetime
 #
 
 class Milestone < ActiveRecord::Base

@@ -15,6 +15,7 @@ module Adapters
           title: milestone["title"],
           description: milestone["description"],
           state: milestone["state"],
+          date: DateTime.parse(milestone["updated_at"]),
           project_id: project.id,
           collaborator_id: milestone_creator.collaborator.id
         )

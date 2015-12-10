@@ -14,6 +14,7 @@ module Adapters
         Issue.find_or_create_by(
           title: issue["title"],
           body: issue["body"],
+          date: DateTime.parse(issue["updated_at"]),
           state: issue["state"],
           project_id: project.id,
           collaborator_id: issue_creator.collaborator.id
