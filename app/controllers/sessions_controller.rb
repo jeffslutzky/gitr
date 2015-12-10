@@ -19,8 +19,8 @@ class SessionsController < ApplicationController
       session[:user_token] = auth_hash[:credentials][:token]
 
 			github = Github.new
-			github.current_options[:client_id] = ENV["GITHUB_KEY"]
-			github.current_options[:client_secret] = ENV["GITHUB_SECRET"]
+			# github.current_options[:client_id] = ENV["GITHUB_KEY"]
+			# github.current_options[:client_secret] = ENV["GITHUB_SECRET"]
       github.current_options[:oauth_token] = session[:user_token]
 
 			login_name = auth_hash[:extra][:raw_info][:login]
@@ -43,6 +43,9 @@ class SessionsController < ApplicationController
 			url: repo.html_url,
 			description: repo[:description]
 		})
+    project.get_milestones
+    project.get_issues
+
     collaborators.each do |collaborator_hash|
       User.find_or_create_from_api(project,collaborator_hash)
     end

@@ -2,13 +2,15 @@
 #
 # Table name: issues
 #
-#  id         :integer          not null, primary key
-#  title      :string
-#  body       :text
-#  created_at :datetime         not null
-#  closed_at  :string
-#  updated_at :datetime         not null
-#  project_id :integer
+#  id              :integer          not null, primary key
+#  title           :string
+#  body            :text
+#  state           :string
+#  created_at      :datetime         not null
+#  closed_at       :string
+#  updated_at      :datetime         not null
+#  project_id      :integer
+#  collaborator_id :integer
 #
 
 class Issue < ActiveRecord::Base

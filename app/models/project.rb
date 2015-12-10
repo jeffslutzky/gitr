@@ -61,4 +61,26 @@ class Project < ActiveRecord::Base
 		self.name_and_number_of_collaborators.sort{|a,b| b[1] <=> a[1]}
 	end
 
+	def get_milestones
+		# login_name = current_user.username
+		# binding.pry
+		# github = Github.new oauth_token: token
+		# github = Github.new
+		# github.current_options[:oauth_token] = token
+		# binding.pry
+		# milestones_obj = github.repos.milestones.list user: self.user.name, per_page: 100
+		# issues = Github::Client::Issues.new
+		# milestones = issues.milestones.list user: self.user.username, repo: self.name, state: 'open'
+		# binding.pry
+
+		client = Adapters::MilestoneClient.new
+		results = client.get_milestones_for_project(self.user.username,self)
+		# binding.pry
+	end
+
+	def get_issues
+		client = Adapters::IssuesClient.new
+		results = client.get_issues_for_project(self.user.username,self)
+	end
+
 end
