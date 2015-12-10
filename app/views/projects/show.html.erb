@@ -51,10 +51,11 @@
       <div class="list-group">
         <%= link_to "All Milestones", project_milestones_path(@project), class: "list-group-item active" %>
         <% @project.milestones.each do |milestone| %>
-              <%= link_to project_milestone_path(@project, milestone), class: "list-group-item"%>
+              <%= link_to project_milestone_path(@project, milestone), class: "list-group-item" do %>
               <%= milestone.title %>:
               <br />
               <%= milestone.description %>
+              <% end %>
         <% end %>
       </div>
     </div>
@@ -69,15 +70,15 @@
       <% end %>
 
       <div class="list-group">
-        <%= link_to "All Issues", project_issues_path(@project), class: "list-group-item active" %>
+        <%= link_to "All Issues", project_issues_path(@project), class: "list-group-item active"%>
         <% @project.issues.each do |issue| %>
-              <%= link_to project_issue_path(@project, issue), class: "list-group-item"%>
+              <%= link_to project_issue_path(@project, issue), class: "list-group-item" do %>
               <%= issue.title %>:
+          <% end %>
         <% end %>
       </div>
     </div>
   </div>
-
 
   <!-- Feed -->
   <div class="col-xs-4">
@@ -87,7 +88,6 @@
           <div class="list-group-item active">
             Recent Push Events
           </div>
-
                   <% @push_events.each do |event| %>
                   <%= event.actor.login %>
                     <div class="pic-thumbnail">
