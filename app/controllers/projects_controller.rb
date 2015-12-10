@@ -13,7 +13,6 @@ class ProjectsController < ApplicationController
 
 
   def show
-
     if logged_in?
       # Showing all events from a repo for an activity feed
       github = Github.new user: current_user.username, repo:"#{@project.name}"
