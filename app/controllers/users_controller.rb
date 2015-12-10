@@ -7,6 +7,9 @@
   end
 
   def show
+    github = Github.new user: current_user.username
+    github.oauth_token = session["user_token"]
+    @user_events_received = github.activity.events.user_received
   end
 
   def new

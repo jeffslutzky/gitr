@@ -22,7 +22,8 @@ class Project < ActiveRecord::Base
 	has_many :issues
 	has_many :commits
 	belongs_to :admin
-	delegate :user, to: :admin
+	# Can we specify to allow nil nto be set to true
+	delegate :user, to: :admin, allow_nil: true
 
 	def self.with_the_most_collaborators
 		self.sort_by_number_of_collaborators.first
@@ -75,6 +76,15 @@ class Project < ActiveRecord::Base
 	def get_commits
 		client = Adapters::CommitsClient.new
 		results = client.get_commits_for_project(self.user.username,self)
+
+  def self.find_push_events(all_repo_events)
+		push_events = []
+		all_repo_events.each do |event|
+			if event.type = "PushEvent"
+				push_events << event
+			end
+		end
+		return push_events
 	end
 
 end

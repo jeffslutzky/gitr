@@ -5,8 +5,8 @@ class IssuesController < ApplicationController
   # GET /issues
   # GET /issues.json
   def index
-    @issues = Issue.all
     @project = Project.find(params[:project_id])
+    @issues = @project.issues
   end
 
   # GET /issues/1
@@ -23,8 +23,8 @@ class IssuesController < ApplicationController
 
   # GET /issues/1/edit
   def edit
-    @issue = issue.find(params[:id])
     @project = Project.find(params[:project_id])
+    @issue = Issue.find(params[:id])
   end
 
   # POST /issues

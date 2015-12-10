@@ -3,8 +3,9 @@ class MilestonesController < ApplicationController
   before_filter :require_login
 
   def index
-    @milestones = Milestone.all
     @project = Project.find(params[:project_id])
+    @milestones = @project.milestones
+    # @milestones = Milestone.all
   end
 
   def show
