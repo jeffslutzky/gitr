@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :commits
   root 'application#root'
   get '/projects/dashboard' => 'projects#dashboard'
   get 'sessions/new'
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :milestones
     resources :issues
+    resources :commits
   end
   resources :users
 
