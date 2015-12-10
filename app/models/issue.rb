@@ -26,4 +26,8 @@ class Issue < ActiveRecord::Base
     project.milestones
   end
 
+  def self.sorted_by_date_desc
+    self.order('date desc')
+  end
+
 end

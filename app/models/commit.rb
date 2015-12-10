@@ -14,4 +14,8 @@ class Commit < ActiveRecord::Base
   belongs_to :collaborator
   belongs_to :project
 
+  def self.sorted_by_date_desc
+    self.order('date desc')
+  end
+
 end

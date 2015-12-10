@@ -88,4 +88,28 @@ class Project < ActiveRecord::Base
 		return push_events
 	end
 
+	def commits_sorted_desc
+		self.commits.sorted_by_date_desc
+	end
+
+	def five_most_recent_commits
+		commits_sorted_desc.first(5)
+	end
+
+	def issues_sorted_desc
+		self.issues.sorted_by_date_desc
+	end
+
+	def five_most_recent_issues
+		issues_sorted_desc.first(5)
+	end
+
+	def milestones_sorted_desc
+		self.milestones.sorted_by_date_desc
+	end
+
+	def five_most_recent_milestones
+		milestones_sorted_desc.first(5)
+	end
+
 end
