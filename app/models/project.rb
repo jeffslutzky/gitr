@@ -61,4 +61,14 @@ class Project < ActiveRecord::Base
 		self.name_and_number_of_collaborators.sort{|a,b| b[1] <=> a[1]}
 	end
 
+  def self.find_push_events(all_repo_events)
+		push_events = []
+		all_repo_events.each do |event|
+			if event.type = "PushEvent"
+				push_events << event
+			end
+		end
+		return push_events
+	end
+
 end

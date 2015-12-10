@@ -82,26 +82,20 @@
   <div class="col-xs-4">
     <% if logged_in? %>
     <!--!!!!!!!!!!!!!!!!!!!!Feed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
-    <div id="feed">
-      <h3>Activity Feed</h3>
-        <ol>
-          <% @repo_events.each do |event| %>
-
-          <%= event.actor.login %>
-          <%= event.actor.avatar_url %>
-          <div class="pic-thumbnail">
-            <img src="<%= event.actor.avatar_url %>">
-          </div>
-            <p>
-                <li><strong>Event Type: <%= event.type %></strong></li>
-                <%= DateTime.parse(event.created_at).httpdate %>
-            </p>
-          <% end %>
-        </ol>
-    </div>
+      <div id="feed">
+        <h3>Recent Push Events Feed</h3>
+          <ol>
+            <% @push_events.each do |event| %>
+            <%= event.actor.login %>
+              <div class="pic-thumbnail">
+                <img src="<%= event.actor.avatar_url %>">
+              </div>
+              <p><%= DateTime.parse(event.created_at).httpdate %></p>
+            <% end %>
+          </ol>
+      </div>
     <% end %>
   </div>
-  </ul>
 </div>
 
 
