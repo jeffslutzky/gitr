@@ -20,6 +20,7 @@ class Project < ActiveRecord::Base
 	# the above uses a scope block http://stackoverflow.com/questions/16569994/deprecation-warning-when-using-has-many-through-uniq-in-rails-4
 	has_many :milestones
 	has_many :issues
+	has_many :commits
 	belongs_to :admin
 	# Can we specify to allow nil nto be set to true
 	delegate :user, to: :admin, allow_nil: true
@@ -61,6 +62,20 @@ class Project < ActiveRecord::Base
 	def self.sort_projects_and_number_of_collaborators_desc
 		self.name_and_number_of_collaborators.sort{|a,b| b[1] <=> a[1]}
 	end
+
+	def get_milestones
+		client = Adapters::MilestonesClient.new
+		results = client.get_milestones_for_project(self.user.username,self)
+	end
+
+	def get_issues
+		client = Adapters::IssuesClient.new
+		results = client.get_issues_for_project(self.user.username,self)
+	end
+
+	def get_commits
+		client = Adapters::CommitsClient.new
+		results = client.get_commits_for_project(self.user.username,self)
 
   def self.find_push_events(all_repo_events)
 		push_events = []

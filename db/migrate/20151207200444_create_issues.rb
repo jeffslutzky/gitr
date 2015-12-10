@@ -4,6 +4,7 @@ class CreateIssues < ActiveRecord::Migration
       t.string :title
       t.text :body
       t.integer :milestone_id
+      t.string :state
       t.string :created_at
       t.string :closed_at
 
