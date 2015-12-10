@@ -58,16 +58,18 @@
 		<div class= "col-xs-9">
       <div id="project-details"></div>
 
-			<ul>
-				<strong><h2>Issues since last logout</h2></strong>
-				<% issues = User.issues_since_logout(current_user)%>
-					<% issues.each do |issue| %>
-					<% date = issue.updated_at.to_s %>
-					<li><strong><%= issue.title %></strong> created @ <%= DateTime.parse(date).httpdate %></li>
-					<% end %>
-			</ul>
+			<div id="new-issues"</div>
+				<ul>
+					<strong><h2>Issues since last logout</h2></strong>
+					<% issues = User.issues_since_logout(current_user)%>
+						<% issues.each do |issue| %>
+						<% date = issue.updated_at.to_s %>
+						<li><strong><%= issue.title %></strong> created @ <%= DateTime.parse(date).httpdate %></li>
+						<% end %>
+				</ul>
+			</div>
 
-			<div class="dashboard-analytics">
+			<div id="dashboard-analytics">
 				<h3> Analytics </h3>
 				<h4> Number of collaborators on each project </h4>
 				<svg id="graph1"></svg>
