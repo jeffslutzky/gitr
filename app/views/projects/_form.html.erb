@@ -12,7 +12,7 @@
   <% end %>
 
   <!-- limit project editing to admins only -->
-
+ 
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -26,7 +26,6 @@
 
   <!-- add collaborators -->
   <!-- let admin add collabs who aren't in the database -->
-  <!-- don't include in the dropdown menu those who are already on the project -->
 
   <div>
     <%= f.label :collaborators %><br>
@@ -37,10 +36,9 @@
 
   <div>
   <%= f.label :add_a_collaborator %>
-  <%= f.collection_select :user, User.all, :id, :name %>
+  <%= f.collection_select :user, User.not_a_collaborator(@project), :id, :name %>
 
   </div>
-
 
   <div class="actions">
     <%= f.submit %>
