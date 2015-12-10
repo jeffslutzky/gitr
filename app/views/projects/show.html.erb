@@ -43,7 +43,7 @@
   <!-- Milestones -->
   <div class="col-xs-4">
     <div id="milestones">
-      
+
       <% if logged_in? && current_user.id == @project.admin_id %>
         <p><%= link_to "New Milestone", new_project_milestone_path(@project), class: "btn btn-primary btn-sm" %></p>
       <% end %>
@@ -51,11 +51,10 @@
       <div class="list-group">
         <%= link_to "All Milestones", project_milestones_path(@project), class: "list-group-item active" %>
         <% @project.milestones.each do |milestone| %>
-              <%= link_to project_milestone_path(@project, milestone), class: "list-group-item" do %>
+              <%= link_to project_milestone_path(@project, milestone), class: "list-group-item"%>
               <%= milestone.title %>:
               <br />
               <%= milestone.description %>
-              <% end %>
         <% end %>
       </div>
     </div>
@@ -64,7 +63,7 @@
   <!-- Issues -->
   <div class="col-xs-4">
     <div id="issues">
-      
+
       <% if logged_in? && current_user.id == @project.admin_id %>
         <p><%= link_to "New Issue", new_project_issue_path(@project), class: "btn btn-primary btn-sm" %></p>
       <% end %>
@@ -72,11 +71,8 @@
       <div class="list-group">
         <%= link_to "All Issues", project_issues_path(@project), class: "list-group-item active" %>
         <% @project.issues.each do |issue| %>
-              <%= link_to project_issue_path(@project, issue), class: "list-group-item" do %>
+              <%= link_to project_issue_path(@project, issue), class: "list-group-item"%>
               <%= issue.title %>:
-              <br />
-              <%= issue.description %>
-              <% end %>
         <% end %>
       </div>
     </div>
@@ -107,7 +103,3 @@
   </div>
 
 </div>
-
-
-
-<%= link_to 'Back', projects_path %>
