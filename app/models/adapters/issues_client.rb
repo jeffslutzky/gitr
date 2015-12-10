@@ -10,7 +10,6 @@ module Adapters
       issues.each do |issue|
         issue_creator_uid = issue["user"]["id"]
         issue_creator = User.find_by(uid: issue_creator_uid)
-        binding.pry
         # the following does not necessarily account for an issue that gets modified
         Issue.find_or_create_by(
           title: issue["title"],

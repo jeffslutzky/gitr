@@ -19,9 +19,11 @@ class SessionsController < ApplicationController
       session[:user_token] = auth_hash[:credentials][:token]
 
 			github = Github.new
+      # the options below don't seem to be needed
 			# github.current_options[:client_id] = ENV["GITHUB_KEY"]
 			# github.current_options[:client_secret] = ENV["GITHUB_SECRET"]
       github.current_options[:oauth_token] = session[:user_token]
+      ENV["GITHUB_TOKEN"] = session[:user_token]
 
 			login_name = auth_hash[:extra][:raw_info][:login]
 
