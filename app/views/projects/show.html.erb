@@ -89,18 +89,17 @@
       <div id="feed">
         <div class="list-group">
           <div class="list-group-item active">
-            Recent Push Events
+            Most Recent Push Events
           </div>
-
-                  <% @push_events.each do |event| %>
-                  <%= event.actor.login %>
-                    <div class="pic-thumbnail">
-                      <img src="<%= event.actor.avatar_url %>">
-                    </div>
-                    <p><%= DateTime.parse(event.created_at).httpdate %></p>
-                  <% end %>
-
-
+          <% @push_events.each do |event| %>
+            <div class="list-group-item">
+              by: <%= event.actor.login %>
+              <p><div class="pic-thumbnail">
+                <img src="<%= event.actor.avatar_url %>">
+              </div></p>
+              <p><%= DateTime.parse(event.created_at).httpdate %></p>
+              </div>
+          <% end %>
         </div>
       </div>
     <% end %>
