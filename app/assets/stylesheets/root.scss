@@ -41,8 +41,10 @@ nav {
   text-decoration: none;
 }
 
-.btn-sm {
-  padding: 0px 5px;
+.mark-inactive {
+  padding: 0px 0px !important;
+  border-radius: 0px !important;
+  display: inline;
 }
 
 li.active a {

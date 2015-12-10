@@ -53,10 +53,9 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    new_collaborator = Collaborator.find_by(user_id: User.find(params[:project][:user]))
-    @project.add_collaborator(new_collaborator)
-
     if !params[:mark_inactive] #normal mode
+      new_collaborator = Collaborator.find_by(user_id: User.find(params[:project][:user]))
+      @project.add_collaborator(new_collaborator)
       respond_to do |format|
         if @project.update(project_params)
           format.html { redirect_to @project, notice: 'Project was successfully updated.' }

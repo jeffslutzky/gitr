@@ -6,7 +6,7 @@
 		<ul class="list-group">
 		{{#each projects as |project|}}
 			<li class="project-li list-group-item" data-project-id="{{project.id}}">
-			 <%= button_tag "x", {class: "btn-sm mark-inactive"}%>
+				<%= button_tag "x", {class: "btn-sm mark-inactive"}%>
 			 <a href="#">{{ project.name }}</a>
 			</li>
 		{{/each}}
