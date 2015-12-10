@@ -28,7 +28,7 @@
 <div id="top-header">
   <div id="collaborators">
     <div class="list-group">
-      <div class="list-group-item active" id="collaborator-list">
+      <div class="list-group-item active">
         Collaborators
       </div>
       <% @project.collaborators.each do |collaborator| %>
@@ -49,7 +49,7 @@
       <% end %>
 
       <div class="list-group">
-        <%= link_to "Milestones", project_milestones_path(@project), class: "list-group-item active" %>
+        <%= link_to "All Milestones", project_milestones_path(@project), class: "list-group-item active" %>
         <% @project.milestones.each do |milestone| %>
               <%= link_to project_milestone_path(@project, milestone), class: "list-group-item" do %>
               <%= milestone.title %>:
@@ -70,7 +70,7 @@
       <% end %>
 
       <div class="list-group">
-        <%= link_to "Issues", project_issues_path(@project), class: "list-group-item active" %>
+        <%= link_to "All Issues", project_issues_path(@project), class: "list-group-item active" %>
         <% @project.issues.each do |issue| %>
               <%= link_to project_issue_path(@project, issue), class: "list-group-item" do %>
               <%= issue.title %>:
@@ -82,20 +82,26 @@
     </div>
   </div>
 
+
   <!-- Feed -->
   <div class="col-xs-4">
     <% if logged_in? %>
       <div id="feed">
-        <h3>Recent Push Events Feed</h3>
-          <ol>
-            <% @push_events.each do |event| %>
-            <%= event.actor.login %>
-              <div class="pic-thumbnail">
-                <img src="<%= event.actor.avatar_url %>">
-              </div>
-              <p><%= DateTime.parse(event.created_at).httpdate %></p>
-            <% end %>
-          </ol>
+        <div class="list-group">
+          <div class="list-group-item active">
+            Recent Push Events
+          </div>
+
+                  <% @push_events.each do |event| %>
+                  <%= event.actor.login %>
+                    <div class="pic-thumbnail">
+                      <img src="<%= event.actor.avatar_url %>">
+                    </div>
+                    <p><%= DateTime.parse(event.created_at).httpdate %></p>
+                  <% end %>
+
+
+        </div>
       </div>
     <% end %>
   </div>
