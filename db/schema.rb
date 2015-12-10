@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20151210145241) do
   create_table "issues", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
+    t.string   "state"
     t.datetime "created_at",      null: false
     t.string   "closed_at"
     t.datetime "updated_at",      null: false
