@@ -21,7 +21,8 @@ class Project < ActiveRecord::Base
 	has_many :milestones
 	has_many :issues
 	belongs_to :admin
-	delegate :user, to: :admin
+	# Can we specify to allow nil nto be set to true
+	delegate :user, to: :admin, allow_nil: true
 
 	def self.with_the_most_collaborators
 		self.sort_by_number_of_collaborators.first
