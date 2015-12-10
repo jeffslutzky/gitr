@@ -20,6 +20,7 @@ class Project < ActiveRecord::Base
 	# the above uses a scope block http://stackoverflow.com/questions/16569994/deprecation-warning-when-using-has-many-through-uniq-in-rails-4
 	has_many :milestones
 	has_many :issues
+	has_many :commits
 	belongs_to :admin
 	delegate :user, to: :admin
 
@@ -62,25 +63,18 @@ class Project < ActiveRecord::Base
 	end
 
 	def get_milestones
-		# login_name = current_user.username
-		# binding.pry
-		# github = Github.new oauth_token: token
-		# github = Github.new
-		# github.current_options[:oauth_token] = token
-		# binding.pry
-		# milestones_obj = github.repos.milestones.list user: self.user.name, per_page: 100
-		# issues = Github::Client::Issues.new
-		# milestones = issues.milestones.list user: self.user.username, repo: self.name, state: 'open'
-		# binding.pry
-
-		client = Adapters::MilestoneClient.new
+		client = Adapters::MilestonesClient.new
 		results = client.get_milestones_for_project(self.user.username,self)
-		# binding.pry
 	end
 
 	def get_issues
 		client = Adapters::IssuesClient.new
 		results = client.get_issues_for_project(self.user.username,self)
+	end
+
+	def get_commits
+		client = Adapters::CommitsClient.new
+		results = client.get_commits_for_project(self.user.username,self)
 	end
 
 end

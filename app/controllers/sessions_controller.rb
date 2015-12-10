@@ -47,6 +47,7 @@ class SessionsController < ApplicationController
 		})
     project.get_milestones
     project.get_issues
+    project.get_commits
 
     collaborators.each do |collaborator_hash|
       User.find_or_create_from_api(project,collaborator_hash)
