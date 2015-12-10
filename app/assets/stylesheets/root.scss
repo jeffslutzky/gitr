@@ -30,7 +30,7 @@ nav {
 }
 
 #projects-board {
-  margin-top: 20px;
+  margin-top: 64px;
 }
 
 .btn:visited {
@@ -50,4 +50,10 @@ nav {
 li.active a {
   color: white;
   font-weight: 700
+}
+
+.dashboard-row {
+  margin-left: -10% !important;
+  margin-right: -10% !important;
+  // width: 100% !important;
 }
