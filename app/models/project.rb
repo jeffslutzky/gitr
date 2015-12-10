@@ -21,7 +21,8 @@ class Project < ActiveRecord::Base
 	has_many :milestones
 	has_many :issues
 	belongs_to :admin
-	delegate :user, to: :admin
+	# Can we specify to allow nil nto be set to true
+	delegate :user, to: :admin, allow_nil: true
 
 	def self.with_the_most_collaborators
 		self.sort_by_number_of_collaborators.first
@@ -59,6 +60,16 @@ class Project < ActiveRecord::Base
 
 	def self.sort_projects_and_number_of_collaborators_desc
 		self.name_and_number_of_collaborators.sort{|a,b| b[1] <=> a[1]}
+	end
+
+  def self.find_push_events(all_repo_events)
+		push_events = []
+		all_repo_events.each do |event|
+			if event.type = "PushEvent"
+				push_events << event
+			end
+		end
+		return push_events
 	end
 
 end

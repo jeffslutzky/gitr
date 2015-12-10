@@ -3,8 +3,10 @@
 <p>
   <strong>Github: <a href ="http://github.com/<%=@user.username%>"><%= @user.username%></a></strong>
 </p>
-
-<p id="notice"><%= notice %></p>
+<% if logged_in? && current_user.id == @user.id %>
+	<%= link_to 'Edit', edit_user_path(@user) %> |
+<% end %>
+<%= link_to 'Back', users_path %>
 
 
 <% if @user.avatar_url %>
@@ -13,33 +15,27 @@
   </p>
 <% end %>
 
-<!-- <p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
 
+<div class="row">
+  <div class="col-xs-6">
+    <p>
+    	<h3>Projects:</h3>
+    	<ol>
+    	<% @user.projects.each do |project| %>
+    		<li><%= link_to project.name, project%></li>
+    	<% end %>
+    	</ol>
+    </p>
+  </div>
 
-<p>
-  <strong>Github ID:</strong>
-  <%= @user.uid %>
-</p>
-
- -->
-
-<p>
-	<strong>Projects:</strong>
-
-	<ol>
-	<% @user.projects.each do |project| %>
-		<li><%= link_to project.name, project%></li>
-	<% end %>
-	</ol>
-
-
-</p>
-
-<% if logged_in? && current_user.id == @user.id %>
-	<%= link_to 'Edit', edit_user_path(@user) %> |
-<% end %>
-
-<%= link_to 'Back', users_path %>
+  <div class="col-xs-6">
+    <div id="recent-events">
+      <strong><h3>All Recent Events:</h3></strong>
+      <% @user_events_received.each do |event| %>
+      <%= event.type %>
+      <img src="<%= event.actor.avatar_url %>">
+      <%= event.repo.name %>
+        <% end %>
+    </div>
+  </div>
+</div>
