@@ -10,6 +10,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  collaborator_id :integer
+#  date            :datetime
 #
 
 class Milestone < ActiveRecord::Base
@@ -37,5 +38,8 @@ class Milestone < ActiveRecord::Base
   	self.all.order(created_at: :desc).first
   end
 
+  def self.sorted_by_date_desc
+    self.order('date desc')
+  end
 
 end

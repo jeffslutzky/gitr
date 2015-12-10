@@ -19,6 +19,9 @@ module Adapters
         commit_creator = User.find_by(uid: commit_creator_uid)
         if commit_creator
           commit.collaborator = commit_creator.collaborator
+        else
+          # attribute anonymous commits to the project creator
+          commit.collaborator = project.user.collaborator
         end
       end
     end

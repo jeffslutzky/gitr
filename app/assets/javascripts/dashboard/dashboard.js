@@ -11,11 +11,10 @@ $(function(){
   });
 })
 
-$(document).on("click", ".project-li", function (){
-  $(this).addClass('active')
+$(document).on("click", ".project-li a", function (){
+  $(this).addClass('active');
 
-
-  var project_id = this.dataset.projectId;
+  var project_id = $(this).parent()[0].dataset.projectId;
   $.ajax({
     url: '/projects/' + project_id,
     dataType: 'json'
