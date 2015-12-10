@@ -76,6 +76,7 @@ class Project < ActiveRecord::Base
 	def get_commits
 		client = Adapters::CommitsClient.new
 		results = client.get_commits_for_project(self.user.username,self)
+	end
 
   def self.find_push_events(all_repo_events)
 		push_events = []
