@@ -12,8 +12,10 @@ $(function(){
 })
 
 $(document).on("click", ".project-li a", function (){
-  $(this).addClass('active');
+  $('#new-issues').slideUp(500);
+  $('#dashboard-analytics').slideUp(500);
 
+  $(this).addClass('active');
   var project_id = $(this).parent()[0].dataset.projectId;
   $.ajax({
     url: '/projects/' + project_id,
