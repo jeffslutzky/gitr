@@ -19,6 +19,7 @@ class ProjectsController < ApplicationController
       github = Github.new user: current_user.username, repo:"#{@project.name}"
       github.oauth_token = session["user_token"]
       @repo_events = github.activity.events.public
+      binding.pry
       respond_to do |format|
         format.html { render :show }
         format.json {

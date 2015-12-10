@@ -25,16 +25,17 @@
 
 </div>
 
-
-<div id="collaborators">
-  <h3>Collaborators:</h3>
-  <ul>
-    <% @project.collaborators.each do |collaborator| %>
-      <li>
-      <%= link_to collaborator.user.name, collaborator.user %>
-    </li>
-    <% end %>
-  </ul>
+<div id="top-header">
+  <div id="collaborators">
+      <h3>Collaborators:</h3>
+      <ul>
+        <% @project.collaborators.each do |collaborator| %>
+          <li>
+          <%= link_to collaborator.user.name, collaborator.user %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
 </div>
 
 <div class="row">
@@ -42,35 +43,41 @@
     <!--!!!!!!!!!!!!!!!!!!!!Milestones!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
     <div id="milestones">
       <h3><%= link_to "Milestones:", project_milestones_path(@project) %></h3>
-      <ul>
-        <% @project.milestones.each do |milestone| %>
-          <li>
-            <td><%= link_to "#{milestone.title}", project_milestone_path(@project, milestone)%></td>
-            <p>Description: <%=milestone.description %></p>
-        </li>
-        <% end %>
-      </ul>
+      <% if logged_in? && current_user.id == @project.admin_id %>
+        <a href="<%= new_project_milestone_path(@project) %>" class="btn btn-primary btn-sm">New Milestone</a>
+        <a href="<%= project_milestones_path(@project) %>" class="btn btn-primary btn-sm">All Milestones</a>
+      <% end %>
+      <p>
+        <ul>
+          <% @project.milestones.each do |milestone| %>
+            <li>
+              <td><%= link_to "#{milestone.title}", project_milestone_path(@project, milestone)%></td>
+              <p>Description: <%=milestone.description %></p>
+          </li>
+          <% end %>
+        </ul>
+      </p>
     </div>
-    <% if logged_in? && current_user.id == @project.admin_id %>
-      <%= link_to 'New Milestone', new_project_milestone_path(@project) %> |
-    <% end %>
   </div>
   <div class="col-xs-4">
     <!--!!!!!!!!!!!!!!!!!!!!Issues!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
     <div id="issues">
       <h3><%= link_to "Issues:", project_issues_path(@project) %></h3>
-      <ul>
-        <% @project.issues.each do |issue| %>
-          <li>
-            <td><%= link_to "#{issue.title}", project_issue_path(@project, issue)%></td>
-            <p>Description: <%=issue.body %></p>
-        </li>
-        <% end %>
-      </ul>
+      <% if logged_in? && current_user.id == @project.admin_id %>
+        <a href="<%= new_project_issue_path(@project) %>" class="btn btn-primary btn-sm">New Issue</a>
+        <a href="<%= project_issues_path(@project) %>" class="btn btn-primary btn-sm">All Issues</a>
+      <% end %>
+      <p>
+        <ul>
+          <% @project.issues.each do |issue| %>
+            <li>
+              <td><%= link_to "#{issue.title}", project_issue_path(@project, issue)%></td>
+              <p>Description: <%=issue.body %></p>
+          </li>
+          <% end %>
+        </ul>
+      </p>
     </div>
-    <% if logged_in? && current_user.id == @project.admin_id %>
-      <%= link_to 'New Issue', new_project_issue_path(@project) %> |
-    <% end %>
   </div>
   <div class="col-xs-4">
     <% if logged_in? %>
@@ -85,7 +92,6 @@
           <div class="pic-thumbnail">
             <img src="<%= event.actor.avatar_url %>">
           </div>
-
             <p>
                 <li><strong>Event Type: <%= event.type %></strong></li>
                 <%= DateTime.parse(event.created_at).httpdate %>
