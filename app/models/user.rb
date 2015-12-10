@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
 	end
 
 	def self.find_or_create_from_api(project,collaborator_hash)
+		
 		@user = User.find_by(uid: collaborator_hash[:id])
 		if !@user
 			@user = User.create({
