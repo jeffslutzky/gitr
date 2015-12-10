@@ -12,14 +12,10 @@
   <tbody>
     <% @commits.each do |commit| %>
       <tr>
-        <td><%= link_to 'Show', commit %></td>
-        <td><%= link_to 'Edit', edit_commit_path(commit) %></td>
-        <td><%= link_to 'Destroy', commit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to commit.message, commit.url %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Commit', new_commit_path %>

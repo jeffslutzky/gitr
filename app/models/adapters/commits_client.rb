@@ -10,9 +10,9 @@ module Adapters
       commits.each do |commit|
         commit = Commit.find_or_create_by(
           message: commit["commit"]["message"],
-          url: commit["commit"]["url"],
+          url: commit["html_url"],
           date: DateTime.parse(commit["commit"]["author"]["date"]),
-          project_id: project.id
+          project: project
         )
 
         commit_creator_uid = commit["author"]
