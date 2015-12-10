@@ -20,6 +20,8 @@
     <%= f.text_area :body %>
   </div>
 
+<!-- Need something to close the an issue.  -->
+<!-- We have a closed_at field  -->
 
   <%= f.collection_select(:milestones, @project.milestones, :id, :title ) %>
 

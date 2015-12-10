@@ -23,8 +23,8 @@ class IssuesController < ApplicationController
 
   # GET /issues/1/edit
   def edit
-    @issue = issue.find(params[:id])
     @project = Project.find(params[:project_id])
+    @issue = Issue.find(params[:id])
   end
 
   # POST /issues
