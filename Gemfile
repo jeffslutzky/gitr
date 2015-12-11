@@ -14,15 +14,13 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'annotate'
-gem 'omniauth'
-gem 'omniauth-github'
 gem 'figaro'
 gem 'pry-byebug'
 gem 'factory_girl_rails', '~> 4.0'
 gem 'github_api'
 gem 'httparty'
 gem 'sidekiq'
-gem 'rails-api'
+# gem 'rails-api'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'active_model_serializers'
 # Use jquery as the JavaScript library
@@ -49,7 +47,10 @@ gem 'twitter-bootswatch-rails', '~> 3.3.4'
 # twitter bootstrap helpers gem, e.g., alerts etc...
 gem 'twitter-bootswatch-rails-helpers'
 gem 'therubyracer'
+gem 'httparty'
 
+gem 'omniauth'
+gem 'omniauth-github'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

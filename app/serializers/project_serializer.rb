@@ -3,10 +3,4 @@ class ProjectSerializer < ActiveModel::Serializer
 
   attributes :id, :milestone_id
 
-  #   def attributes
-  #   attributes = super
-  #   attributes[:milestone] = object.milestone.try(:as_json)
-  #   attributes
-  # end
-  
 end
