@@ -1,12 +1,12 @@
 <h1> Number of collaborators on each project </h1>
 
-<svg id="graph1"></svg>
+<svg id="analytics-1"></svg>
 
 <script>
   $.ajax({
     url: '/analytics/1',
     dataType: 'json'
   }).success(function(data){
-    draw(data)
+    draw_project_collaborators_chart(data)
   })
 </script>

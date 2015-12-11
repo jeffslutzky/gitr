@@ -6,7 +6,7 @@
 		<ul class="list-group">
 		{{#each projects as |project|}}
 			<li class="project-li list-group-item" data-project-id="{{project.id}}">
-				<%= button_tag "x", {class: "btn-sm mark-inactive"}%>
+				<%= button_tag "x", {class: "btn btn-danger mark-inactive"}%>
 			 <a href="#">{{ project.name }}</a>
 			</li>
 		{{/each}}
@@ -39,12 +39,7 @@
 
 <!-- Send request to analytics controller -->
 <script>
-  $.ajax({
-    url: '/analytics/1',
-    dataType: 'json'
-  }).success(function(data){
-    draw(data)
-  })
+
 </script>
 
 <% if logged_in? %>
@@ -58,19 +53,23 @@
       <div id="project-details"></div>
 
 			<div id="new-issues"</div>
-				<ul>
-					<strong><h2>Issues since last logout</h2></strong>
+				<div class="list-group">
+				  <p class="list-group-item active">
+				    Issues since last logout
+				  </p>
 					<% issues = User.issues_since_logout(current_user)%>
 						<% issues.each do |issue| %>
-						<% date = issue.updated_at.to_s %>
-						<li><strong><%= issue.title %></strong> created @ <%= DateTime.parse(date).httpdate %></li>
-						<% end %>
-				</ul>
+							<p class="list-group-item active">
+								<% date = issue.updated_at.to_s %>
+								<strong><%= issue.title %></strong> created @ <%= DateTime.parse(date).httpdate %>
+							</p>
+					<% end %>
+				</div>
 			</div>
 
 			<div id="dashboard-analytics">
 				<h3> Analytics </h3>
-				<h4> Number of collaborators on each project </h4>
+				<h4> Number of commits you've made on your active projects </h4>
 				<svg id="graph1"></svg>
 			</div>
 		</div>

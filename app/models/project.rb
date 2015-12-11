@@ -112,4 +112,15 @@ class Project < ActiveRecord::Base
 		milestones_sorted_desc.first(5)
 	end
 
+	def self.sort_by_number_of_commits
+		self.select('projects.*, count(commits.id) as count_commits').group('projects.id').joins(:commits).order('count_commits desc')
+	end
+
+	def self.number_of_commits_by_user_on_active_projects(user)
+		self.active.map do |project|
+			project.commits.where('collaborator_id = ?', user.collaborator.id).count
+		end
+		# Project.group('projects.name').joins(:commits).joins(:collaborators).count('commits.collaborator_id = 1')
+		end
+
 end

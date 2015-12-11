@@ -12,16 +12,39 @@ class SessionsController < ApplicationController
     	provider: auth_hash[:provider],
     	username: auth_hash[:extra][:raw_info][:login],
     	avatar_url: auth_hash[:extra][:raw_info][:avatar_url]
-    	)
-	  if @user
+    )
+    
+    session[:user_id] = @user.id
+    session[:user_token] = auth_hash[:credentials][:token]
+
+# 	  if !@user.lastlogout
+#       github = Github.new
+#       # the options below don't seem to be needed
+# 			# github.current_options[:client_id] = ENV["GITHUB_KEY"]
+# 			# github.current_options[:client_secret] = ENV["GITHUB_SECRET"]
+#       github.current_options[:oauth_token] = session[:user_token]
+#       ENV["GITHUB_TOKEN"] = session[:user_token]
+#
+# 			login_name = auth_hash[:extra][:raw_info][:login]
+#
+#       github_repos = github.repos.list user: login_name, per_page: 100
+# 			github_repos.each do |repo|
+# 				if !@user.admin.projects.find_by(github_repo_id: repo.id)
+#           collaborators = github.repos.collaborators.all  repo.owner.login, repo.name
+# 					assign_attributes_to_repo(repo,collaborators)
+# 				end
+# 			end
+# =======
+    	# )
+	  if !@user.lastlogout
       set_session_and_github(session, auth_hash)
 	  end
   	redirect_to root_url
 	end
 
   def set_session_and_github(session, auth_hash)
-    session[:user_id] = @user.id
-    session[:user_token] = auth_hash[:credentials][:token]
+    # session[:user_id] = @user.id
+    # session[:user_token] = auth_hash[:credentials][:token]
     github = Github.new
 
       # these options don't seem to be needed:
@@ -42,7 +65,7 @@ class SessionsController < ApplicationController
         collaborators = github.repos.collaborators.all  repo.owner.login, repo.name
         assign_attributes_to_repo(repo, collaborators)
       end
-    end    
+    end
   end
 
 
