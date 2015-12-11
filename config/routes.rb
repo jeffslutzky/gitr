@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   get '/analytics/1' => 'analytics#projects_vs_collaborators'#, :defaults => { :format => 'json' }
   get '/analytics/2' => 'analytics#number_of_commits_for_active_projects'
 
+  namespace :api do
+    namespace :v1 do
+      resources :projects
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -22,6 +22,9 @@ gem 'factory_girl_rails', '~> 4.0'
 gem 'github_api'
 gem 'httparty'
 gem 'sidekiq'
+gem 'rails-api'
+gem 'rack-cors', :require => 'rack/cors'
+gem 'active_model_serializers'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -46,8 +49,6 @@ gem 'twitter-bootswatch-rails', '~> 3.3.4'
 # twitter bootstrap helpers gem, e.g., alerts etc...
 gem 'twitter-bootswatch-rails-helpers'
 gem 'therubyracer'
-
-gem 'httparty'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
