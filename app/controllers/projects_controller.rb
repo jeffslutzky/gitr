@@ -17,8 +17,11 @@ class ProjectsController < ApplicationController
       # Showing all events from a repo for an activity feed
       github = Github.new user: current_user.username, repo:"#{@project.name}", oauth_token: session["user_token"]
       all_repo_events = github.activity.events.repos
-      
+
       @push_events = Project.find_push_events(all_repo_events)
+
+      @languages = github.repos.languages.body.to_h
+      @total_commits = github.repos.commits.list.count
 
       respond_to do |format|
         format.html { render :show }
