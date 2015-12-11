@@ -33,6 +33,10 @@ nav {
   margin-top: 64px;
 }
 
+#project-details {
+  margin-top: -20px;
+}
+
 #new-issues-title {
   text-align: center;
   position: relative;
@@ -72,6 +76,6 @@ li.active a {
 }
 
 .dashboard-row {
-  margin-left: -10%;
-  margin-right: -10%;
+  margin-left: -15% !important;
+  margin-right: -15% !important;
 }

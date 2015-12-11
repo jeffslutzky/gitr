@@ -35,7 +35,7 @@
           </div>
           <div class="col-xs-4">
             <div class="list-group-item active">
-              Most Used Languages
+              Most Used Languages (By Characters)
             </div>
               <% @languages.each do |lang, count| %>
                 <div class="list-group-item">
@@ -45,11 +45,15 @@
           </div>
           <div class="col-xs-4">
             <div class="list-group-item active">
-              Commit History
+              Five Most Recent Commits
             </div>
-              <div class="list-group-item">
-                Total Commits: <%= @total_commits %>
-              </div>
+              <% @project.five_most_recent_commits.each do |commit| %>
+              <%= link_to project_commit_path(@project, commit), class: "list-group-item" do %>
+              <%= commit.message %>:
+              <br />
+              <%= commit.date.httpdate %>
+              <% end %>
+        <% end %>
         </div>
       </div>
     </div>
@@ -65,8 +69,8 @@
 
 
         <div class="list-group">
-        <%= link_to "All Milestones", project_milestones_path(@project), class: "list-group-item active" %>
-        <% @project.milestones.each do |milestone| %>
+        <%= link_to "Five Most Recent Milestones", project_milestones_path(@project), class: "list-group-item active" %>
+        <% @project.five_most_recent_milestones.each do |milestone| %>
               <%= link_to project_milestone_path(@project, milestone), class: "list-group-item" do %>
               <%= milestone.title %>:
               <br />
@@ -86,8 +90,8 @@
     <div id="issues">
 
       <div class="list-group">
-        <%= link_to "All Issues", project_issues_path(@project), class: "list-group-item active"%>
-        <% @project.issues.each do |issue| %>
+        <%= link_to "Five Most Recent Issues", project_issues_path(@project), class: "list-group-item active"%>
+        <% @project.five_most_recent_issues.each do |issue| %>
               <%= link_to project_issue_path(@project, issue), class: "list-group-item" do %>
               <%= issue.title %>
               <br />
