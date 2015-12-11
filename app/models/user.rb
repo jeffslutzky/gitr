@@ -41,22 +41,36 @@ class User < ActiveRecord::Base
 	end
 
 	def self.find_or_create_from_api(project,collaborator_hash)
-		
+
 		@user = User.find_by(uid: collaborator_hash[:id])
 		if !@user
 			@user = User.create({
 				name: collaborator_hash[:login],
 				username: collaborator_hash[:login],
-				uid: collaborator_hash[:id]
+				uid: collaborator_hash[:id],
+				admin: Admin.create,
+				collaborator: Collaborator.create
 			})
-			@user.build_admin
-			@user.admin.save
-			@user.build_collaborator
+			# @user.build_admin
+			# @user.admin.save
+			# @user.build_collaborator.save
+			# @user.save
 			# collaborator.projects << project
 			# collaborator.save
-			@user.collaborator.save
+			# @user.collaborator.save
 		end
-		project.collaborators << @user.collaborator
+
+		# some logic to treat strange failure mode
+		if !@user.collaborator
+			@user.build_admin.save
+			@user.build_collaborator.save
+		end
+		# begin
+			project.collaborators << @user.collaborator
+		# rescue
+
+			# binding.pry
+		# end
 	end
 
 	def collaborators
@@ -97,5 +111,13 @@ class User < ActiveRecord::Base
   	end
 		user_array
   end
+
+	def active_projects
+		self.projects.sort_projects_and_number_of_collaborators_desc.active
+	end
+
+	def total_number_of_commits
+		Commit.joins(:project).joins(:collaborator).where("collaborators.id = ?", self.id).count
+	end
 
 end

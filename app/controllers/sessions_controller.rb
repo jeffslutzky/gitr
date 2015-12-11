@@ -12,13 +12,12 @@ class SessionsController < ApplicationController
     	provider: auth_hash[:provider],
     	username: auth_hash[:extra][:raw_info][:login],
     	avatar_url: auth_hash[:extra][:raw_info][:avatar_url]
-    	)
-
-	  if @user
-      session[:user_id] = @user.id
-      session[:user_token] = auth_hash[:credentials][:token]
-
-			github = Github.new
+    )
+    session[:user_id] = @user.id
+    session[:user_token] = auth_hash[:credentials][:token]
+    
+	  if !@user.lastlogout
+      github = Github.new
       # the options below don't seem to be needed
 			# github.current_options[:client_id] = ENV["GITHUB_KEY"]
 			# github.current_options[:client_secret] = ENV["GITHUB_SECRET"]

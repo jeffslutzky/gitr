@@ -55,7 +55,7 @@ function draw(my_data) {
       .data( my_data.n_collaborators )
       .enter().append("rect")
         .attr("class", "bar")
-        .attr("x", function(d,i) { return 0.98*i*xtick_spacing+xtick_spacing*0.25; })
+        .attr("x", function(d,i) { return 0.985*i*xtick_spacing+xtick_spacing*0.25; })
         .attr("width", 0.8*x.rangeBand())
         .attr("y", function(d) { return d })
         .attr("height", function(d) { return height - y(d); })
