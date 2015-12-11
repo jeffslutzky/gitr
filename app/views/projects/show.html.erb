@@ -48,7 +48,7 @@
         <p><%= link_to "New Milestone", new_project_milestone_path(@project), class: "btn btn-primary btn-sm" %></p>
       <% end %>
 
-      <div class="list-group">
+        <div class="list-group">
         <%= link_to "All Milestones", project_milestones_path(@project), class: "list-group-item active" %>
         <% @project.milestones.each do |milestone| %>
               <%= link_to project_milestone_path(@project, milestone), class: "list-group-item" do %>
@@ -73,8 +73,9 @@
         <%= link_to "All Issues", project_issues_path(@project), class: "list-group-item active"%>
         <% @project.issues.each do |issue| %>
               <%= link_to project_issue_path(@project, issue), class: "list-group-item" do %>
-              <%= issue.title %>:
-          <% end %>
+              <%= issue.title %>
+              <br />
+              <% end %>
         <% end %>
       </div>
     </div>
