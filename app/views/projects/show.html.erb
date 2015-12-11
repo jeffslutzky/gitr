@@ -1,6 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-
 <div id="project-title">
 
   <h2><a href="<%= @project.url %>"><%= @project.name %></a>
@@ -25,48 +24,39 @@
 </div>
 
 <div class="row">
-
-<div id="top-header">
-  <div id="collaborators">
-    <div class="list-group">
-
-
-      <div class="col-xs-4">
-        <div class="list-group-item active">
-          Collaborators
+  <div id="top-header">
+    <div id="collaborators">
+      <div class="list-group">
+        <div class="col-xs-4">
+          <div class="list-group-item active">
+            Collaborators
+          </div>
+            <% @project.collaborators.each do |collaborator| %>
+              <%= link_to collaborator.user.name, collaborator.user, class: "list-group-item" %>
+            <% end %>
+          </div>
+          <div class="col-xs-4">
+            <div class="list-group-item active">
+              Most Used Languages
+            </div>
+              <% @languages.each do |lang, count| %>
+                <p class: "list-group-item "> <%= lang %>: <%= count %> </p>
+              <% end %>
+          </div>
+          <div class="col-xs-4">
+            <div class="list-group-item active">
+              Commit History
+            </div>
+              Total Commits: <%= @total_commits %>
         </div>
-        <% @project.collaborators.each do |collaborator| %>
-          <%= link_to collaborator.user.name, collaborator.user, class: "list-group-item" %>
-        <% end %>
       </div>
-
-      <div class="col-xs-4">
-        <div class="list-group-item active">
-          Most Used Languages
-        </div>
-      <% @languages.each do |lang, count| %>
-        <p class: "list-group-item "> <%= lang %>: <%= count %> </p>
-      <% end %>
-    </div>
-
-    <div class="col-xs-4">
-      <div class="list-group-item active">
-        Commit History
-      </div>
-    Total Commits: <%= @total_commits %>
-  </div>
-
     </div>
   </div>
-</div>
-
-
 </div>
 
 <br><br><br>
 
 <div class="row">
-
   <!-- Milestones -->
   <div class="col-xs-4">
     <div id="milestones">

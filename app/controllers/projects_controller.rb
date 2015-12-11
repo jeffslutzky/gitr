@@ -15,6 +15,7 @@ class ProjectsController < ApplicationController
   def show
     if logged_in?
       # Showing all events from a repo for an activity feed
+      # Will refactor to Github Adapter
       github = Github.new user: current_user.username, repo:"#{@project.name}", oauth_token: session["user_token"]
       all_repo_events = github.activity.events.repos
 
