@@ -39,12 +39,7 @@
 
 <!-- Send request to analytics controller -->
 <script>
-  $.ajax({
-    url: '/analytics/1',
-    dataType: 'json'
-  }).success(function(data){
-    draw(data)
-  })
+  
 </script>
 
 <% if logged_in? %>
@@ -70,7 +65,7 @@
 
 			<div id="dashboard-analytics">
 				<h3> Analytics </h3>
-				<h4> Number of collaborators on each project </h4>
+				<h4> Number of commits you've made on your active projects </h4>
 				<svg id="graph1"></svg>
 			</div>
 		</div>

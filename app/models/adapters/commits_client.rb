@@ -28,19 +28,8 @@ module Adapters
           # attribute anonymous commits to the project creator
           commit_creator = User.find_by(username: username)
         end
-
-
-        # commit_creator_name = new_commit["author"]
-        # commit_creator = User.find_by(uid: commit_creator_uid)
-        # if commit_creator
-          # commit.collaborator = commit_creator.collaborator
-        # else
-          # attribute anonymous commits to the project creator
-          # binding.pry
-          # user = User.find_by(username: username)
-          new_commit.collaborator = commit_creator.collaborator
-          new_commit.save
-        # end
+        new_commit.collaborator = commit_creator.collaborator
+        new_commit.save
       end
     end
   end

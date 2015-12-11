@@ -18,17 +18,9 @@ class AnalyticsController < ApplicationController
   end
 
   def number_of_commits_for_active_projects
-    @projects = current_user.first.projects.sort_by_number_of_commits.active
-    data = { name: [], n_commits: [] }
-    @projects.each_with_index do |project_array,i|
-      data[:name]<<project_array[0]
-      data[:n_collaborators]<<project_array[1]
-    end
+    names = current_user.projects.active.map {|project| project.name }
+    n_commits = Project.number_of_commits_by_user_on_active_projects(current_user)
+    data = { name: names, n_commits: n_commits }
     render :json => data
   end
-
-
-
-
-
 end

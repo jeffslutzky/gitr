@@ -42,4 +42,7 @@ $(document).on("click", ".mark-inactive", function (){
     var el = $('.project-li[data-project-id='+data+']')
     el.remove();
   });
+
+  $('#graph1').html("");
+  trigger_collaborators_chart();
 })
