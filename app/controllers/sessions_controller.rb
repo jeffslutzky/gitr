@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
 	end
 
   def create
+    binding.pry
     @user = User.find_by_uid( auth_hash[:uid]) || User.create_from_omniauth(auth_hash)
     @user.update(
     	name: auth_hash[:info][:name],

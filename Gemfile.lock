@@ -20,8 +20,6 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    active_model_serializers (0.9.3)
-      activemodel (>= 3.2)
     activejob (4.2.5)
       activesupport (= 4.2.5)
       globalid (>= 0.3.0)
@@ -142,7 +140,6 @@ GEM
       byebug (~> 8.0)
       pry (~> 0.10)
     rack (1.6.4)
-    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.5)
@@ -242,7 +239,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers
   annotate
   byebug
   coffee-rails (~> 4.1.0)
@@ -256,7 +252,6 @@ DEPENDENCIES
   omniauth-github
   pg (~> 0.15)
   pry-byebug
-  rack-cors
   rails (= 4.2.5)
   rspec-rails
   sass-rails (~> 5.0)
