@@ -4,9 +4,7 @@
 
   <h2><a href="<%= @project.url %>"><%= @project.name %></a>
     <% if logged_in? && current_user.admin.id == @project.admin_id %>
-      <!-- <p> You're the admin for this project! </p> -->
       <a href="<%= edit_project_path(@project) %>" class="btn btn-primary btn-sm">Edit Project</a>
-
     <% else %>
       <p>
         <strong>Admin:</strong>
@@ -40,14 +38,18 @@
               Most Used Languages
             </div>
               <% @languages.each do |lang, count| %>
-                <p class: "list-group-item "> <%= lang %>: <%= count %> </p>
+                <div class="list-group-item">
+                  <%= lang %>: <%= count %>
+                </div>
               <% end %>
           </div>
           <div class="col-xs-4">
             <div class="list-group-item active">
               Commit History
             </div>
-              Total Commits: <%= @total_commits %>
+              <div class="list-group-item">
+                Total Commits: <%= @total_commits %>
+              </div>
         </div>
       </div>
     </div>
