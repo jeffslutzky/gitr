@@ -33,6 +33,16 @@ nav {
   margin-top: 64px;
 }
 
+#new-issues-title {
+  text-align: center;
+  position: relative;
+  margin: auto;
+}
+
+#new-issues {
+  margin-top: 64px;
+}
+
 .btn:visited {
   color: white;
 }
@@ -42,9 +52,18 @@ nav {
 }
 
 .mark-inactive {
-  padding: 0px 0px !important;
-  border-radius: 0px !important;
-  display: inline;
+  font-size: 14;
+  font-weight: 700;
+  // background-color: #C0C0C0;
+  padding: 0px 5px !important;
+  border-radius: 5px !important;
+  // display: inline;
+}
+
+li a:hover {
+  // text-decoration: none !important;
+  color: inherit;
+  font-weight: 700
 }
 
 li.active a {

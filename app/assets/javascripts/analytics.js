@@ -135,6 +135,6 @@ function draw_user_commits_chart(my_data) {
         .attr("x", function(d,i) { return 0.985*i*xtick_spacing+xtick_spacing*0.25; })
         .attr("width", 0.8*x.rangeBand())
         .attr("y", 0)
-        .attr("height", function(d) { debugger; return height - y(d); })
+        .attr("height", function(d) { return height - y(d); })
         .attr("transform", function(d, i) { return "translate(0," + (height - (height-y(d))) + ")"; });
 }

@@ -43,7 +43,7 @@
   <!-- Milestones -->
   <div class="col-xs-4">
     <div id="milestones">
-      
+
       <% if logged_in? && current_user.id == @project.admin_id %>
         <p><%= link_to "New Milestone", new_project_milestone_path(@project), class: "btn btn-primary btn-sm" %></p>
       <% end %>
@@ -64,7 +64,7 @@
   <!-- Issues -->
   <div class="col-xs-4">
     <div id="issues">
-      
+
       <% if logged_in? && current_user.id == @project.admin_id %>
         <p><%= link_to "New Issue", new_project_issue_path(@project), class: "btn btn-primary btn-sm" %></p>
       <% end %>
@@ -75,7 +75,7 @@
               <%= link_to project_issue_path(@project, issue), class: "list-group-item" do %>
               <%= issue.title %>:
               <br />
-              <%= issue.description %>
+              <%= issue.body %>
               <% end %>
         <% end %>
       </div>
