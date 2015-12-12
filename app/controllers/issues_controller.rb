@@ -156,9 +156,11 @@ class IssuesController < ApplicationController
 
   def notifications
     new_notification = Notification.where(unread: true)
-    if new_notification
+    if !new_notification.empty?
+      binding.pry
       new_notification.first.unread = false
-      render json: {data: new_notification.first}
+      new_notification.first.save
+      render json: {data: new_notification.first.message}
     else
       render json: {data: ""}
     end

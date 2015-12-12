@@ -43,9 +43,9 @@ setInterval(function(){
     url: '/notifications',
     dataType: 'json'
   }).success(function(data){
-  	// debugger;
-  	if (data.data.message.length>1) {
-  		$('#notice').text(data.data.message)
+  	if (data.data.length>1) {
+  		debugger;
+  		$('#notice').text(data.data)
   	}
     // var source   = $("#entry-template").html();
     // var template = Handlebars.compile(source);
