@@ -128,6 +128,20 @@ class IssuesController < ApplicationController
 
   def event_handler
     binding.pry
+    ref = params["ref"]
+    ref_type = params["ref_type"]
+    repo_id = params["repository"]["id"]
+    repo = Project.find_by(github_repo_id: repo_id)
+    sender_id = params["sender"]["id"]
+    sender = User.find_by(uid: sender_id)
+
+    if params["commits"]
+      ref_type = "commit"
+    end
+
+    text = "#{sender.name} has made a #{ref_type} in #{repo.name}!"
+     flash[:notice] = text
+
     head :no_content 
     return 
   end
