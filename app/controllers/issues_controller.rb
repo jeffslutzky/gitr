@@ -1,6 +1,7 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
-  before_filter :require_login
+  before_filter :require_login, :except => :event_handler
+  protect_from_forgery except: :event_handler
 
   # GET /issues
   # GET /issues.json
@@ -103,6 +104,7 @@ class IssuesController < ApplicationController
   # PATCH/PUT /issues/1
   # PATCH/PUT /issues/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @issue.update(issue_params)
         format.html { redirect_to project_issue_path, notice: 'Milestone was successfully updated.'  }
@@ -122,6 +124,12 @@ class IssuesController < ApplicationController
       format.html { redirect_to issues_url, notice: 'Issue was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def event_handler
+    binding.pry
+    head :no_content 
+    return 
   end
 
   private
