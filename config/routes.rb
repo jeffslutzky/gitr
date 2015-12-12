@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get '/analytics/2' => 'analytics#number_of_commits_for_active_projects'
 
   post '/event_handler' => 'issues#event_handler'  
+  get '/notifications' => 'issues#notifications'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

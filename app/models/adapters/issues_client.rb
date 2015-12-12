@@ -21,7 +21,7 @@ module Adapters
         issue_creator_uid = issue["user"]["id"]
         issue_creator = User.find_by(uid: issue_creator_uid)
         if issue_creator
-          if !issue.collaborator
+          if !issue_creator.collaborator
             collaborator = issue_creator.build_collaborator
             collaborator.save
           end

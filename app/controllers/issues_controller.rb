@@ -139,11 +139,27 @@ class IssuesController < ApplicationController
     end
 
     text = "#{sender.name} has made a #{ref_type} in #{repo.name}!"
-    flash[:notice] = text
-    redirect_to "application#root"
+    Notification.create({
+      message: text,
+      user: current_user
+    })
+    # flash[:notice] = text
+    # redirect_to "application#root"
+    # render :json => {text: text}
+    # redirect_to "root", turbolinks: true, flash: {notice: "Created object successfully."}
+    # redirect_to root_path
+
 
     head :no_content 
     return 
+  end
+
+  def notifications
+    new_notifications = Notification.where(unread: true)
+    if new_notifications
+      binding.pry
+      render json: new_notifications
+    end
   end
 
   private
