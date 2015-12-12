@@ -155,10 +155,12 @@ class IssuesController < ApplicationController
   end
 
   def notifications
-    new_notifications = Notification.where(unread: true)
-    if new_notifications
-      binding.pry
-      render json: new_notifications
+    new_notification = Notification.where(unread: true)
+    if new_notification
+      new_notification.first.unread = false
+      render json: {data: new_notification.first}
+    else
+      render json: {data: ""}
     end
   end
 

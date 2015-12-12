@@ -43,23 +43,22 @@ setInterval(function(){
     url: '/notifications',
     dataType: 'json'
   }).success(function(data){
-  	debugger;
+  	// debugger;
+  	if (data.data.message.length>1) {
+  		$('#notice').text(data.data.message)
+  	}
     // var source   = $("#entry-template").html();
     // var template = Handlebars.compile(source);
     // $('#projects-board').append(template({projects: data}));
   });
 }, 1000);
 
-$(document).on("ajax:success", function(e,data) {
-	debugger;
-})
 </script>
 
 <% if logged_in? %>
 
 <div class="container">
-	<div id="notice"><%= notice %></div>
-	<div id="notice">Testing notice</div>
+	<div id="notice"></div>
 	<div class="row dashboard-row">
 		<div class="col-xs-4">
 			<div id="projects-board"></div>
