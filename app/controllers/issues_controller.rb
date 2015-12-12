@@ -140,7 +140,7 @@ class IssuesController < ApplicationController
 
     text = "#{sender.name} has made a #{ref_type} in #{repo.name}!"
     flash[:notice] = text
-    redirect_to 'root'
+    render 'root'
 
     head :no_content 
     return 
