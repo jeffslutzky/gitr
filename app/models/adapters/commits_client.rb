@@ -17,18 +17,25 @@ module Adapters
 
         if commit["author"]
           commit_creator = User.find_by(uid: commit["author"]["id"])
+          # some project contributors are on the source repo, not a fork
+          # following logic handles those cases by creating a new user
           if !commit_creator
             commit_creator = User.create(
               name: commit["commit"]["author"]["name"],
               username: commit["author"]["login"],
-              uid: commit["author"]["id"]
+              uid: commit["author"]["id"],
+              collaborator: Collaborator.create
             )
           end
         else
           # attribute anonymous commits to the project creator
           commit_creator = User.find_by(username: username)
         end
-        new_commit.collaborator = commit_creator.collaborator
+        begin
+          new_commit.collaborator = commit_creator.collaborator
+        rescue
+          binding.pry
+        end
         new_commit.save
       end
     end

@@ -17,7 +17,6 @@ module Adapters
       }
       connection.get("https://api.github.com/repos/#{user}/#{repo}/#{resource}",options)
     end
-  end
 
   # Auth_token, cohort id
     def post(user, repo, resource)

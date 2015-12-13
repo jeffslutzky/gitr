@@ -10,7 +10,7 @@ module Adapters
       issues.each do |issue|
 
         # the following does not necessarily account for an issue that gets modified
-        Issue.find_or_create_by(
+        new_issue = Issue.find_or_create_by(
           title: issue["title"],
           body: issue["body"],
           date: DateTime.parse(issue["updated_at"]),
@@ -21,10 +21,15 @@ module Adapters
         issue_creator_uid = issue["user"]["id"]
         issue_creator = User.find_by(uid: issue_creator_uid)
         if issue_creator
-          issue.collaborator = issue_creator.collaborator
+          begin
+            new_issue.collaborator = issue_creator.collaborator
+          rescue
+            binding.pry
+          end
         else
+          binding.pry
           # attribute anonymous issues to the project creator
-          issue.collaborator = project.user.collaborator
+          new_issue.collaborator = project.user.collaborator
         end
       end
     end

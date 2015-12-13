@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     	username: auth_hash[:extra][:raw_info][:login],
     	avatar_url: auth_hash[:extra][:raw_info][:avatar_url]
     )
-    
+
     session[:user_id] = @user.id
     session[:user_token] = auth_hash[:credentials][:token]
 
@@ -76,13 +76,14 @@ class SessionsController < ApplicationController
 			url: repo.html_url,
 			description: repo[:description]
 		})
-    project.get_milestones
-    project.get_issues
-    project.get_commits
 
     collaborators.each do |collaborator_hash|
       User.find_or_create_from_api(project,collaborator_hash)
     end
+
+    project.get_milestones
+    project.get_issues
+    project.get_commits
   end
 
 

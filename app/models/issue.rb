@@ -15,6 +15,7 @@
 
 class Issue < ActiveRecord::Base
   belongs_to :project
+  belongs_to :collaborator
   #validation
   validates :title, presence: true
   validates :title, length: { minimum: 3 }
