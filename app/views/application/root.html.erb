@@ -1,4 +1,4 @@
-<script id="entry-template" type="text/x-handlebars-template" src="javascripts/dashboard/dashboard.js">
+<script id="entry-template" type="text/x-handlebars-template" >
 	<div class="panel panel-success">
 	  <div class="panel-heading">
 	    <h3 class="panel-title">Active Projects</h3>
@@ -12,33 +12,6 @@
 		{{/each}}
 		</ul>
 	</div>
-
-</script>
-<script id= "project-details-template" type="text/x-handlebars-template">
-  <p>
-  {{project.name}}
-  </p>
-   <p>
-  {{project.url}}
-  </p>
-   <p>
-  {{project.admin.user.name}}
-  </p>
-   <p>
-    {{#each project.collaborators as |collaborator|}}
-      {{collaborator.user.name}}
-    {{/each}}
-  </p>
-   <p>
-    {{#each project.milestones as |milestone|}}
-      {{milestone.title}}
-    {{/each}}
-  </p>
-
-</script>
-
-<!-- Send request to analytics controller -->
-<script>
 
 </script>
 
@@ -67,9 +40,15 @@
 			</div>
 
 			<div id="dashboard-analytics">
-				<h3> Analytics </h3>
-				<h4> Number of commits you've made on your active projects </h4>
-				<svg id="graph1"></svg>
+				<div class="list-group">
+				  <p class="list-group-item active">
+				    Analytics
+				  </p>
+					<p class="list-group-item">
+						<strong>Number of commits you've made on your active projects</strong>
+						<svg id="graph1"></svg>
+					</p>
+				</div>
 			</div>
       <div id="project-details"></div>
 		</div>
