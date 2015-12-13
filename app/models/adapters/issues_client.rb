@@ -8,7 +8,6 @@ module Adapters
     def get_issues_for_project(username, project)
       issues = connection.query(username, project.name,'issues')
       issues.each do |issue|
-
         # the following does not necessarily account for an issue that gets modified
         new_issue = Issue.find_or_create_by(
           title: issue["title"],
@@ -21,13 +20,8 @@ module Adapters
         issue_creator_uid = issue["user"]["id"]
         issue_creator = User.find_by(uid: issue_creator_uid)
         if issue_creator
-          begin
-            new_issue.collaborator = issue_creator.collaborator
-          rescue
-            binding.pry
-          end
+          new_issue.collaborator = issue_creator.collaborator
         else
-          binding.pry
           # attribute anonymous issues to the project creator
           new_issue.collaborator = project.user.collaborator
         end

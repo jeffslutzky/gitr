@@ -58,7 +58,7 @@
 				  </p>
 					<% issues = User.issues_since_logout(current_user)%>
 						<% issues.each do |issue| %>
-							<p class="list-group-item active">
+							<p class="list-group-item">
 								<% date = issue.updated_at.to_s %>
 								<strong><%= issue.title %></strong> created @ <%= DateTime.parse(date).httpdate %>
 							</p>

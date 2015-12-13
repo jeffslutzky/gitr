@@ -96,7 +96,12 @@ class User < ActiveRecord::Base
 	def self.issues_since_logout(current_user)
 		#Shows all issues since a user logged out
 		lastlogout = current_user.lastlogout
-		Issue.where('created_at > ?', lastlogout )
+		if lastlogout
+			Issue.where('created_at > ?', lastlogout )
+		else
+			# return five random issues
+			Issue.all.take(5)
+		end
 	end
 
 	def self.milestones_since_logout(current_user)
