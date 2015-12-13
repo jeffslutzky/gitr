@@ -124,6 +124,46 @@ class IssuesController < ApplicationController
     end
   end
 
+  def event_handler
+    ref = params["ref"]
+    ref_type = params["ref_type"]
+    repo_id = params["repository"]["id"]
+    repo = Project.find_by(github_repo_id: repo_id)
+    sender_id = params["sender"]["id"]
+    sender = User.find_by(uid: sender_id)
+
+    if params["commits"]
+      ref_type = "commit"
+    end
+
+    text = "#{sender.name} has made a #{ref_type} in #{repo.name}!"
+    Notification.create({
+      message: text,
+      user: current_user
+    })
+    # flash[:notice] = text
+    # redirect_to "application#root"
+    # render :json => {text: text}
+    # redirect_to "root", turbolinks: true, flash: {notice: "Created object successfully."}
+    # redirect_to root_path
+
+
+    head :no_content
+    return
+  end
+
+  def notifications
+    new_notification = Notification.where(unread: true)
+    if !new_notification.empty?
+      binding.pry
+      new_notification.first.unread = false
+      new_notification.first.save
+      render json: {data: new_notification.first.message}
+    else
+      render json: {data: ""}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_issue
