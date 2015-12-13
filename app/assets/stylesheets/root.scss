@@ -72,7 +72,6 @@ li.active a {
 }
 
 .dashboard-row {
-  margin-top: 70px !important;
   margin-left: -10% !important;
   margin-right: -10% !important;
 }
@@ -81,5 +80,8 @@ nav.navbar {
   position: fixed;
   width: 100%;
   z-index: 5;
-  margin-bottom: 200px !important;
+}
+
+.container {
+  padding-top: 80px;
 }
