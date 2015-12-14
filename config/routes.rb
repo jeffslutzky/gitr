@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
   resources :commits
-  root 'application#root'
+  root 'dashboard#root'
   get '/projects/dashboard' => 'projects#dashboard'
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'
+
+  get '/projects/:id/get_recent_activity' => 'projects#get_recent_activity'
 
   resources :projects do
     resources :milestones

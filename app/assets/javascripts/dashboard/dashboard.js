@@ -23,6 +23,9 @@ $(document).on("click", ".project-li a", function (){
   }).success(function(data){
     $('#project-details').html("");
     $('#project-details').append(data.template);
+
+    url = this.url;
+    get_activity_feed(url);
   });
 
   if (last_clicked_item) {
@@ -46,3 +49,12 @@ $(document).on("click", ".mark-inactive", function (){
   $('#graph1').html("");
   trigger_collaborators_chart();
 })
+
+function get_activity_feed(url){
+  $.ajax({
+    url: url+'/get_recent_activity',
+    datatype: 'json'
+  }).success(function(data){
+    $('#feed').append(data.html);
+  })
+}

@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
 
     session[:user_id] = @user.id
     session[:user_token] = auth_hash[:credentials][:token]
+    ENV["GITHUB_TOKEN"] = session[:user_token]
 
 # 	  if !@user.lastlogout
 #       github = Github.new

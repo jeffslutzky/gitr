@@ -21,7 +21,6 @@ setInterval(function(){
     dataType: 'json'
   }).success(function(data){
   	if (data.data.length>1) {
-  		// $('#notice').text(data.data)
 			alert(data.data);
   	}
   });
@@ -31,13 +30,13 @@ setInterval(function(){
 <% if logged_in? %>
 
 <div class="container">
-	<div id="notice"></div>
+
 	<div class="row dashboard-row">
 		<div class="col-xs-4">
 			<div id="projects-board"></div>
 		</div>
-		<div class= "col-xs-8">
 
+		<div class= "col-xs-8">
 			<div id="new-issues"</div>
 				<div class="list-group">
 				  <p class="list-group-item active">
@@ -69,7 +68,6 @@ setInterval(function(){
 	</div>
 </div>
 <% else %>
-
 	<div id="front-page">
 		<%= image_tag "github_workspace.jpg" %>
 
@@ -77,5 +75,4 @@ setInterval(function(){
 			<h1>Welcome to Gitr!</h1>
 		  <p>A web application to manage all your GitHub projects!</p>
 		</div>
-
 <% end %>

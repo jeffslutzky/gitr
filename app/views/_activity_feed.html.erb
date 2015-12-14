@@ -1,0 +1,14 @@
+<div class="list-group">
+  <div class="list-group-item active">
+    Most Recent Push Events
+  </div>
+  <% events.each do |event| %>
+    <div class="list-group-item">
+      by: <%= event["actor"]["login"] %>
+      <p><div class="pic-thumbnail">
+        <img src="<%= event["actor"]["avatar_url"] %>">
+      </div></p>
+      <p><%= DateTime.parse(event["created_at"]).httpdate %></p>
+      </div>
+  <% end %>
+</div>

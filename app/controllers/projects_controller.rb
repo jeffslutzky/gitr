@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :get_recent_activity]
   before_filter :require_login
 
   def index
@@ -13,24 +13,22 @@ class ProjectsController < ApplicationController
 
 
   def show
-    if logged_in?
-      # Showing all events from a repo for an activity feed
-      # Will refactor to Github Adapter
-      github = Github.new user: current_user.username, repo:"#{@project.name}", oauth_token: session["user_token"]
-      all_repo_events = github.activity.events.repos
+    # Showing all events from a repo for an activity feed
+    # Will refactor to Github Adapter
+    github = Github.new user: current_user.username, repo:"#{@project.name}", oauth_token: session["user_token"]
+    all_repo_events = github.activity.events.repos
 
-      @push_events = Project.find_push_events(all_repo_events)
+    # @push_events = Project.find_push_events(all_repo_events)
 
-      @languages = github.repos.languages.body.to_h
-      @total_commits = github.repos.commits.list.count
+    @languages = github.repos.languages.body.to_h
+    # @total_commits = github.repos.commits.list.count
 
-      respond_to do |format|
-        format.html { render :show }
-        format.json {
-          html_string = render_to_string 'show.html.erb', layout: false
-          render json: {template: html_string}
-        }
-      end
+    respond_to do |format|
+      format.html { render :show }
+      format.json {
+        html_string = render_to_string 'show.html.erb', layout: false
+        render json: {template: html_string}
+      }
     end
   end
 
@@ -81,6 +79,13 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def get_recent_activity
+    recent_events = @project.get_activity_feed
+    html = render_to_string '/_activity_feed', :locals => {events: recent_events}, layout: false
+
+    render json: {html: html}
   end
 
   private

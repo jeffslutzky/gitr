@@ -1,6 +1,9 @@
 class DashboardController < ApplicationController
   protect_from_forgery except: :event_handler
 
+  def root
+  end
+
   def event_handler
     binding.pry
     ref = params["ref"]
@@ -19,8 +22,6 @@ class DashboardController < ApplicationController
       message: text,
       user: current_user
     })
-
-    render flahst noitice
 
     head :no_content
     return

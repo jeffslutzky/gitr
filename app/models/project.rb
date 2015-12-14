@@ -78,10 +78,15 @@ class Project < ActiveRecord::Base
 		results = client.get_commits_for_project(self.user.username,self)
 	end
 
+	def get_activity_feed
+		client = Adapters::ActivityFeedClient.new
+		results = client.get_activity_feed_for_project(self.user.username,self)
+	end
+
   def self.find_push_events(all_repo_events)
 		push_events = []
 		all_repo_events.each do |event|
-			if event.type = "PushEvent"
+			if event["type"] == "PushEvent"
 				push_events << event
 			end
 		end
