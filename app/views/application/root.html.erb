@@ -12,12 +12,26 @@
 		{{/each}}
 		</ul>
 	</div>
+</script>
 
+<script>
+setInterval(function(){
+  $.ajax({
+    url: '/notifications',
+    dataType: 'json'
+  }).success(function(data){
+  	if (data.data.length>1) {
+  		// $('#notice').text(data.data)
+			alert(data.data);
+  	}
+  });
+}, 1000);
 </script>
 
 <% if logged_in? %>
 
 <div class="container">
+	<div id="notice"></div>
 	<div class="row dashboard-row">
 		<div class="col-xs-4">
 			<div id="projects-board"></div>
