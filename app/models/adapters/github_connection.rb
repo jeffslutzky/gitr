@@ -7,7 +7,7 @@ module Adapters
       @connection = self.class
     end
 
-    def query(user,repo,resource)
+    def query(user,repo,resource,per_page = 100)
       options = {
         headers:{
           "User-Agent" => "gitr",
@@ -15,7 +15,7 @@ module Adapters
         },
         body:{}
       }
-      connection.get("https://api.github.com/repos/#{user}/#{repo}/#{resource}",options)
+      connection.get("https://api.github.com/repos/#{user}/#{repo}/#{resource}?page=1&per_page=#{per_page}",options)
     end
 
   # Auth_token, cohort id
