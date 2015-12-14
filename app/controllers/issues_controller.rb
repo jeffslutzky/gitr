@@ -3,33 +3,25 @@ class IssuesController < ApplicationController
   before_filter :require_login, :except => :event_handler
   protect_from_forgery except: :event_handler
 
-  # GET /issues
-  # GET /issues.json
   def index
     @project = Project.find(params[:project_id])
     @issues = @project.issues
   end
 
-  # GET /issues/1
-  # GET /issues/1.json
   def show
     @project = Project.find(params[:project_id])
   end
 
-  # GET /issues/new
   def new
     @issue = Issue.new
     @project = Project.find(params[:project_id])
   end
 
-  # GET /issues/1/edit
   def edit
     @project = Project.find(params[:project_id])
     @issue = Issue.find(params[:id])
   end
 
-  # POST /issues
-  # POST /issues.json
   # def create
   #   @project = Project.find(params[:project_id])
   #   @issue = Issue.new(issue_params)
@@ -101,8 +93,6 @@ class IssuesController < ApplicationController
   end
 
 
-  # PATCH/PUT /issues/1
-  # PATCH/PUT /issues/1.json
   def update
     binding.pry
     respond_to do |format|
@@ -116,8 +106,6 @@ class IssuesController < ApplicationController
     end
   end
 
-  # DELETE /issues/1
-  # DELETE /issues/1.json
   def destroy
     @issue.destroy
     respond_to do |format|
@@ -127,12 +115,10 @@ class IssuesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_issue
       @issue = Issue.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def issue_params
       params.require(:issue).permit(:title, :body, :milestone_id, :created_at, :closed_at)
     end

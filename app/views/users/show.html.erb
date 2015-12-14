@@ -1,41 +1,53 @@
-<!-- login page -->
-<h1><%= @user.name%></h1>
+<p id="notice"><%= notice %></p>
+
+<div id="user-header">
+
+<h1><%= @user.name%>
+<% if logged_in? && current_user.id == @user.id %>
+	<%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-primary btn-sm" %>
+<% end %></h1>
 <p>
   <strong>Github: <a href ="http://github.com/<%=@user.username%>"><%= @user.username%></a></strong>
 </p>
-<% if logged_in? && current_user.id == @user.id %>
-	<%= link_to 'Edit', edit_user_path(@user) %> |
-<% end %>
-<%= link_to 'Back', users_path %>
-
 
 <% if @user.avatar_url %>
-  <p>
-  <img src="<%= @user.avatar_url %>" width=150>
-  </p>
+  <div class="pic-userpage">
+      <img src="<%= @user.avatar_url %>">
+  </div>
 <% end %>
-
+</div>
 
 <div class="row">
   <div class="col-xs-6">
-    <p>
-    	<h3>Projects:</h3>
-    	<ol>
+    <div class="list-group">
+      <div class="list-group-item active">
+        Projects
+      </div>
     	<% @user.projects.each do |project| %>
-    		<li><%= link_to project.name, project%></li>
+          <%= link_to project.name, project, class: "list-group-item" %>
     	<% end %>
-    	</ol>
-    </p>
+    </div>
   </div>
 
   <div class="col-xs-6">
-    <div id="recent-events">
-      <strong><h3>All Recent Events:</h3></strong>
-      <% @user_events_received.each do |event| %>
-      <%= event.type %>
-      <img src="<%= event.actor.avatar_url %>">
-      <%= event.repo.name %>
+    <div id="feed">
+      <div class="list-group">
+        <div class="list-group-item active">
+          Recent Events From Your Collaborators
+        </div>
+        <% @user_events_received.each do |event| %>
+          <div class="list-group-item">
+            by: <%= event.actor.login %>
+            <p><div class="pic-thumbnail">
+              <img src="<%= event.actor.avatar_url %>">
+            </div></p>
+            <p>Event type: <%= event.type %></p>
+            <p>Repo: <%= event.repo.name %></p>
+            <p><%= DateTime.parse(event.created_at).httpdate %></p>
+          </div>
         <% end %>
+      </div>
     </div>
+  </div>
   </div>
 </div>

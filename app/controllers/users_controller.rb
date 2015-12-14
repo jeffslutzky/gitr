@@ -17,6 +17,10 @@
   end
 
   def edit
+    if current_user != @user
+      redirect_to user_path
+      flash[:notice] = "You must be this user to edit this page."
+    end
   end
 
 
@@ -37,7 +41,7 @@
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'Your profile has been updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -55,12 +59,10 @@
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :uid, :provider)
     end
