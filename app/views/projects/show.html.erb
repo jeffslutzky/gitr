@@ -33,16 +33,12 @@
               <%= link_to collaborator.user.name, collaborator.user, class: "list-group-item" %>
             <% end %>
           </div>
+
           <div class="col-xs-4">
-            <div class="list-group-item active">
-              Most Used Languages (By Characters)
+            <div id="languages">
             </div>
-              <% @languages.each do |lang, count| %>
-                <div class="list-group-item">
-                  <%= lang %>: <%= count %>
-                </div>
-              <% end %>
           </div>
+
           <div class="col-xs-4">
             <div class="list-group-item active">
               Five Most Recent Commits

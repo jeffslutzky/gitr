@@ -1,0 +1,8 @@
+<div class="list-group-item active">
+  Most Used Languages (By Characters)
+</div>
+  <% languages.each do |lang, count| %>
+    <div class="list-group-item">
+      <%= lang %>: <%= count %>
+    <% end %>
+</div>
