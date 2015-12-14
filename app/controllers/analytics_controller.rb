@@ -9,12 +9,7 @@ class AnalyticsController < ApplicationController
       data[:name]<<project_array[0]
       data[:n_collaborators]<<project_array[1]
     end
-
-      #  respond_to do |format|
-        # format.js {
-          render :json => data
-        # }
-    # end
+    render :json => data
   end
 
   def number_of_commits_for_active_projects

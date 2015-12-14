@@ -1,28 +1,22 @@
 class CommitsController < ApplicationController
   before_action :set_commit, only: [:show, :edit, :update, :destroy]
 
-  # GET /commits
-  # GET /commits.json
+
   def index
     @commits = Commit.all
   end
 
-  # GET /commits/1
-  # GET /commits/1.json
+
   def show
   end
 
-  # GET /commits/new
   def new
     @commit = Commit.new
   end
 
-  # GET /commits/1/edit
   def edit
   end
 
-  # POST /commits
-  # POST /commits.json
   def create
     @commit = Commit.new(commit_params)
 
@@ -37,8 +31,6 @@ class CommitsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /commits/1
-  # PATCH/PUT /commits/1.json
   def update
     respond_to do |format|
       if @commit.update(commit_params)
@@ -51,8 +43,6 @@ class CommitsController < ApplicationController
     end
   end
 
-  # DELETE /commits/1
-  # DELETE /commits/1.json
   def destroy
     @commit.destroy
     respond_to do |format|
@@ -62,12 +52,10 @@ class CommitsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_commit
       @commit = Commit.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def commit_params
       params[:commit]
     end
