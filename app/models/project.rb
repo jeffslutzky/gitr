@@ -83,6 +83,15 @@ class Project < ActiveRecord::Base
 		results = client.get_activity_feed_for_project(self.user.username,self)
 	end
 
+	def get_language_statistics
+		client = Adapters::LanguageStatisticsClient.new
+		results = client.get_language_statistics_for_project(self.user.username,self)
+	end
+
+	def self.find_language_statistics(all_repo_events)
+		all_repo_events
+	end
+
   def self.find_push_events(all_repo_events)
 		push_events = []
 		all_repo_events.each do |event|

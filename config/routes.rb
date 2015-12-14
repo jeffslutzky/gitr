@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
 
   get '/projects/:id/get_recent_activity' => 'projects#get_recent_activity'
+  get '/projects/:id/get_language_statistics' => 'projects#get_language_statistics'
 
   resources :projects do
     resources :milestones

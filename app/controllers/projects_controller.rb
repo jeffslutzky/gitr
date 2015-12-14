@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :get_recent_activity]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :get_recent_activity, :get_language_statistics]
   before_filter :require_login
 
   def index
@@ -13,15 +13,10 @@ class ProjectsController < ApplicationController
 
 
   def show
-    # Showing all events from a repo for an activity feed
-    # Will refactor to Github Adapter
     github = Github.new user: current_user.username, repo:"#{@project.name}", oauth_token: session["user_token"]
     # all_repo_events = github.activity.events.repos
 
-    # @push_events = Project.find_push_events(all_repo_events)
-
-    @languages = github.repos.languages.body.to_h
-    # @total_commits = github.repos.commits.list.count
+    languages = github.repos.languages.body.to_h
 
     respond_to do |format|
       format.html { render :show }
@@ -85,6 +80,12 @@ class ProjectsController < ApplicationController
     recent_events = @project.get_activity_feed
     html = render_to_string '/_activity_feed', :locals => {events: recent_events}, layout: false
 
+    render json: {html: html}
+  end
+
+  def get_language_statistics
+    language_statistics = @project.get_language_statistics
+    html = render_to_string '/_language_statistics', :locals => {languages: language_statistics}, layout: false
     render json: {html: html}
   end
 

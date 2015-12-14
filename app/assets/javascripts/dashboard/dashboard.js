@@ -26,6 +26,7 @@ $(document).on("click", ".project-li a", function (){
 
     url = this.url;
     get_activity_feed(url);
+    get_language_statistics(url);
   });
 
   if (last_clicked_item) {
@@ -56,5 +57,14 @@ function get_activity_feed(url){
     datatype: 'json'
   }).success(function(data){
     $('#feed').append(data.html);
+  })
+}
+
+function get_language_statistics(url){
+  $.ajax({
+    url: url+'/get_language_statistics',
+    datatype: 'json'
+  }).success(function(data){
+    $('#languages').append(data.html);
   })
 }
