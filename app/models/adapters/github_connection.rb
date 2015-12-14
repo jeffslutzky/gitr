@@ -29,6 +29,6 @@ module Adapters
       }
       connection.put("https://api.github.com/repos/#{user}/#{repo}/#{resource}",options)
     end
-  # end
+  end
 
 end
