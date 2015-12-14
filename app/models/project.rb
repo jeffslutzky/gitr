@@ -81,7 +81,7 @@ class Project < ActiveRecord::Base
   def self.find_push_events(all_repo_events)
 		push_events = []
 		all_repo_events.each do |event|
-			if event.type = "PushEvent"
+			if event.type == "PushEvent"
 				push_events << event
 			end
 		end
