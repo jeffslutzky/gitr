@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
 
   def show
     github = Github.new user: current_user.username, repo:"#{@project.name}", oauth_token: session["user_token"]
-    all_repo_events = github.activity.events.repos
+    # all_repo_events = github.activity.events.repos
 
     languages = github.repos.languages.body.to_h
 
