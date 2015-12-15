@@ -18,7 +18,6 @@ module Adapters
       connection.get("https://api.github.com/repos/#{user}/#{repo}/#{resource}?page=1&per_page=#{per_page}",options)
     end
 
-  # Auth_token, cohort id
     def post(user, repo, resource)
       options = {
         headers:{
