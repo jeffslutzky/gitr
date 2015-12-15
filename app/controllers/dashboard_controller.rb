@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
   end
 
   def event_handler
-    # binding.pry
+    binding.pry
     ref = params["ref"]
     ref_type = params["ref_type"]
     repo_id = params["repository"]["id"]
