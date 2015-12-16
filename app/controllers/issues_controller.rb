@@ -22,43 +22,6 @@ class IssuesController < ApplicationController
     @issue = Issue.find(params[:id])
   end
 
-  # def create
-  #   @project = Project.find(params[:project_id])
-  #   @issue = Issue.new(issue_params)
-  #   @issue.project = @project
-  #
-  #     if @issue.save
-  #       respond_to do |format|
-  #     # begin
-  #       #Github object to create new issue
-  #       github = Github.new user: current_user.username, repo:"#{@project.name}"
-  #       github.oauth_token = session["user_token"]
-  #
-  #       #Gathering milestone ID from new issues form
-  #       milestone_id = params['issue']['milestones']
-  #
-  #       #Creating new issue on github with milestone ID
-  #       github.issues.create title: "#{@issue.title}",
-  #         body: "#{@issue.body}"
-  #         # assignee: "octocat",
-  #         # milestone: "#{milestone_id}"
-  #
-  #     # rescue Github::Error::ServiceError
-  #     #   # notice: "You don't have access to post issues to this repo"
-  #     #   # flash[:notice] = "Post NOT successfully created"
-  #     #   format.html { redirect_to project_issue_path(@project, @issue), notice: 'Issue has been saved on local but you do not have access to push to remote.' }
-  #     # end
-  #       format.html { redirect_to project_issue_path(@project, @issue), notice: 'Issue was successfully created.' }
-  #       format.json { render :show, status: :created, location: project_issue_path }
-  # #
-  #     else
-  #       format.html { render :new, notice: 'Issue was not successfully updated.' }
-  #       format.json { render json: project_issue_path.errors, status: :unprocessable_entity  }
-  #
-  #     end
-  #   end
-  # end
-
   def create
       @project = Project.find(params[:project_id])
       @issue = Issue.new(issue_params)

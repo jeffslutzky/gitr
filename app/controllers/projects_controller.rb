@@ -31,6 +31,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    @project = Project.find(params[:id])
+    if current_user.admin.id != @project.admin_id
+      flash[:notice] = "You must be this project's administrator in order to edit this project."
+      redirect_to project_path(params[:id])
+    end
   end
 
   def create
