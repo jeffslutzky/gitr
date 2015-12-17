@@ -69,7 +69,7 @@ class SessionsController < ApplicationController
 
 
   def get_user_repos(login_name, github)
-    github_repos = github.repos.list user: login_name, per_page: 100
+    github_repos = github.repos.list user: login_name, per_page: 10
     github_repos.each do |repo|
       begin
         if !@user.admin.projects.find_by(github_repo_id: repo.id)
