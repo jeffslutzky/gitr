@@ -46,6 +46,7 @@ gem 'twitter-bootswatch-rails', '~> 3.3.4'
 # twitter bootstrap helpers gem, e.g., alerts etc...
 gem 'twitter-bootswatch-rails-helpers'
 gem 'therubyracer'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
