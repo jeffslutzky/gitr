@@ -1,4 +1,9 @@
-<%= form_for(@project) do |f| %>
+<div class="row">
+<div class="col-lg-6">
+<div class="well bs-component">
+<%= form_for(@project, :html => {:class => "form-horizontal"}) do |f| %>
+  <fieldset>
+  <legend><%= @legend %></legend>
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -11,36 +16,46 @@
     </div>
   <% end %>
 
-  <!-- limit project editing to admins only -->
  
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, class: "col-lg-2 control-label" %><br>
+    <div class="col-lg-10">
+    <%= f.text_field :name, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.radio_button :active, true, :checked => (@project.active), :value => true%> Active</br>
-    <%= f.radio_button :active, false, :checked => (!@project.active), :value => true%> Inactive</br>
+  <div class="form-group">
+    <%= f.label :status, class: "col-lg-2 control-label" %><br>
+        <div class="col-lg-10">
+
+    <%= f.radio_button :active, true, :checked => (@project.active), :value => true %> Active</br>
+    <%= f.radio_button :active, false, :checked => (!@project.active), :value => true %> Inactive</br>
+    </div>
   </div>
 
   <!-- add collaborators -->
-  <!-- let admin add collabs who aren't in the database -->
 
-  <div>
-    <%= f.label :collaborators %><br>
-  <p><% @project.collaborators.each do |collaborator| %>
-    <li><%= link_to collaborator.user.name, collaborator.user %></li>
-  <% end %></p>
-  </div>
+  <% if !@project.collaborators.empty? %>
+    <div class="form-group">
+      <%= f.label :collaborators, class: "col-lg-2 control-label" %><br />
+      <% @project.collaborators.each do |collaborator| %>
+        <%= link_to collaborator.user.name, collaborator.user, class: "col-lg-2 control-label" %>
+      <% end %>
+    </div>
+  <% end %>
 
-  <div>
-  <%= f.label :add_a_collaborator %>
-  <%= f.collection_select :user, User.not_a_collaborator(@project), :id, :name %>
-
+  <div class="form-group">
+  <%= f.label :add_a_collaborator, class: "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= f.collection_select :user, User.not_a_collaborator(@project), :id, :name %>
+    </div>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.button "Submit", class: "btn btn-primary" %>
   </div>
+  </fieldset>
 <% end %>
+</div>
+</div>
+</div>

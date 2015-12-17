@@ -27,6 +27,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    @project = Project.find(params[:id])
+    if current_user.admin.id != @project.admin_id
+      flash[:notice] = "You must be this project's administrator in order to edit this project."
+      redirect_to project_path(params[:id])
+    end
   end
 
   def create
@@ -49,7 +54,7 @@ class ProjectsController < ApplicationController
       @project.add_collaborator(new_collaborator)
       respond_to do |format|
         if @project.update(project_params)
-          format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+          format.html { redirect_to @project, notice: "You've successfully updated your project." }
           format.json { render :show, status: :ok, location: @project }
         else
           format.html { render :edit }
