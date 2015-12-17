@@ -11,8 +11,17 @@ class SessionsController < ApplicationController
     	name: auth_hash[:info][:name],
     	provider: auth_hash[:provider],
     	username: auth_hash[:extra][:raw_info][:login],
-    	avatar_url: auth_hash[:extra][:raw_info][:avatar_url]
+    	avatar_url: auth_hash[:extra][:raw_info][:avatar_url],
     )
+    if !@user.admin
+      @user.build_admin
+      @user.save
+    end
+
+    if !@user.collaborator
+      @user.build_collaborator
+      @user.save
+    end
 
     session[:user_id] = @user.id
     session[:user_token] = auth_hash[:credentials][:token]
@@ -62,9 +71,13 @@ class SessionsController < ApplicationController
   def get_user_repos(login_name, github)
     github_repos = github.repos.list user: login_name, per_page: 100
     github_repos.each do |repo|
-      if !@user.admin.projects.find_by(github_repo_id: repo.id)
-        collaborators = github.repos.collaborators.all  repo.owner.login, repo.name
-        assign_attributes_to_repo(repo, collaborators)
+      begin
+        if !@user.admin.projects.find_by(github_repo_id: repo.id)
+          collaborators = github.repos.collaborators.all  repo.owner.login, repo.name
+          assign_attributes_to_repo(repo, collaborators)
+        end
+      rescue
+        puts
       end
     end
   end
