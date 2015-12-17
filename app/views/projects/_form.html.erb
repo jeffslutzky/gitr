@@ -16,7 +16,7 @@
     </div>
   <% end %>
 
- 
+
   <div class="form-group">
     <%= f.label :name, class: "col-lg-2 control-label" %><br>
     <div class="col-lg-10">
@@ -37,7 +37,7 @@
 
   <% if !@project.collaborators.empty? %>
     <div class="form-group">
-      <%= f.label :collaborators, class: "col-lg-2 control-label" %><br />
+      <%= f.label :collaborators, class: "col-lg-2 control-label" %>
       <% @project.collaborators.each do |collaborator| %>
         <%= link_to collaborator.user.name, collaborator.user, class: "col-lg-2 control-label" %>
       <% end %>
