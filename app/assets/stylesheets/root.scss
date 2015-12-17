@@ -8,10 +8,21 @@
   margin-top:-30px;
   margin-bottom: -30px;
   position: fixed;
-  top: 30%;
+  // top: 35%;
+  top: 200px;
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0.8;
+  width: 100%;
+}
+
+#greeting h3 {
+  text-align: center;
+}
+
+#greeting p {
+  text-align: center;
+  font-size: 12pt;
 }
 
 h1 {

@@ -28,7 +28,12 @@ setInterval(function(){
 </script>
 
 <% if logged_in? %>
-
+ <% if @show_loading_bar %>
+	 <div class="progress progress-striped active">
+	  <div class="progress-bar" style="width: 45%"></div>
+	</div>
+	<% binding.pry %>
+ <% end %>
 <div class="container">
 
 	<div class="row dashboard-row">
@@ -73,6 +78,12 @@ setInterval(function(){
 
 		<div class="jumbotron" id="greeting">
 			<h1>Welcome to Gitr!</h1>
-		  <p>A web application to manage all your GitHub projects!</p>
+		  <h3>Gitr is a web application to manage all your GitHub projects!</p>
+			<p>It works by retrieving data about your repositories and populates a dashboard view
+				of all your projects.
+			</p>
+			<p>If this is your first time logging into the site, it may take some time
+				for your dashboard to load while we retrieve your GitHub data.
+			</p>
 		</div>
 <% end %>
