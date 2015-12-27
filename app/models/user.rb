@@ -25,6 +25,13 @@ class User < ActiveRecord::Base
   #validates :email, uniqueness: true
    #allow_nil: true
 
+	after_initialize :create_admin_and_collaborator
+
+	def create_admin_and_collaborator
+	 	self.admin = Admin.create
+	 	self.collaborator = Collaborator.create
+	end
+
 	def self.create_from_omniauth(auth_hash)
 	  user = self.create(
 	  	provider: auth_hash[:provider],
@@ -33,10 +40,10 @@ class User < ActiveRecord::Base
       username: auth_hash[:login],
       avatar_url: auth_hash[:extra][:raw_info][:avatar_url]
 			)
-    admin = user.build_admin
-    admin.save
-    collaborator = user.build_collaborator
-    collaborator.save
+    # admin = user.build_admin
+    # admin.save
+    # collaborator = user.build_collaborator
+    # collaborator.save
 		user
 	end
 
@@ -47,9 +54,9 @@ class User < ActiveRecord::Base
 			@user = User.create({
 				name: collaborator_hash[:login],
 				username: collaborator_hash[:login],
-				uid: collaborator_hash[:id],
-				admin: Admin.create,
-				collaborator: Collaborator.create
+				uid: collaborator_hash[:id]#,
+				#admin: Admin.create,
+				#collaborator: Collaborator.create
 			})
 			# @user.build_admin
 			# @user.admin.save
@@ -66,7 +73,7 @@ class User < ActiveRecord::Base
 			@user.build_collaborator.save
 		end
 		# begin
-			project.collaborators << @user.collaborator
+		project.collaborators << @user.collaborator
 		# rescue
 
 			# binding.pry
