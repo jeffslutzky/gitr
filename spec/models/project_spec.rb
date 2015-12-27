@@ -71,8 +71,17 @@ describe Project, type: :model do
 		it "returns issues associated with the project" do
 			expect(project.issues).to eq []
 
-			3.times {project.issues.create(title: "Feature")}
+			3.times {project.issues.create}
 			expect(project.issues.length).to eq 3
+		end
+	end
+
+	describe "#issues_sorted_desc" do
+		let(:project) { Project.create }
+		let(:issues)  { Array.new(5).each_with_object([]){ project.issues.create}	}
+
+		it "returns issues associated with the project, sorted by newest to oldest" do
+			expect(project.issues_sorted_desc).to eq issues.reverse
 		end
 	end
 
