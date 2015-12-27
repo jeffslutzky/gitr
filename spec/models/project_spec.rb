@@ -81,13 +81,28 @@ describe Project, type: :model do
 		let(:project2) { Project.create }
 		let(:project3) { Project.create }
 		before(:each) {
-			3.times {project1.issues.create(title: "Feature")}
-			1.times {project2.issues.create(title: "Refactor")}
-			4.times {project3.issues.create(title: "Feature2")}
+			3.times { project1.issues.create(title: "Feature")}
+			1.times { project2.issues.create(title: "Refactor")}
+			4.times { project3.issues.create(title: "Feature2")}
 		}
 
 		it "returns all projects, sorted by the number of issues" do
 			expect(Project.sort_by_number_of_issues).to eq [project3,project1,project2]
+		end
+	end
+
+	describe '.sort_by_number_of_collaborators' do
+		let(:project1) { Project.create }
+		let(:project2) { Project.create }
+		let(:project3) { Project.create }
+		before(:each) {
+			1.times { project1.collaborators.create }
+			3.times { project2.collaborators.create }
+			5.times { project3.collaborators.create }
+		}
+
+		it "returns all projects, sorted by the number of collaborators" do
+			expect(Project.sort_by_number_of_collaborators).to eq [project3,project2,project1]
 		end
 	end
 
